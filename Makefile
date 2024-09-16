@@ -23,6 +23,7 @@ SRC_PATH = ./srcs
 LIBFTPATH = ./libft
 
 FILES = srcs/main.c \
+		srcs/mapping/draw_rect.c \
 		
 
 

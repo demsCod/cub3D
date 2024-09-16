@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:12:40 by mdembele          #+#    #+#             */
-/*   Updated: 2024/07/08 19:30:05 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/09/16 21:06:51 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # define KEYPRESS 2
 # define KEYRELEASE 3
 
+#define RED_PIXEL 0xFF0000
+#define BLUE_PIXEL 0x000000FF
+#define BLACK_PIXEL 0x000000
+#define GREEN_PIXEL 0X00FF00
+
 # define WALL '1'
 # define GROUND '0'
 # define PLAYER 'P'
@@ -30,9 +35,48 @@
 # define MAP_KO "Error\nThe map is not correct"
 # define WINDOWSFAIL "Error\nWindows initiation failed"
 
+typedef struct o_img
+{
+    void	*mlx_img;
+    char	*addr;
+    int		bpp; /* bits per pixel */
+    int		line_len;
+    int		endian;
+}	t_img_data;
+
+typedef struct s_player_rect
+{
+    float	x;
+    float	y;
+    int width;
+    int height;
+    int color;
+}	t_rect_player;
+
+typedef struct s_wall_rect
+{
+    float	x;
+    float	y;
+    int width;
+    int height;
+    int color;
+}	t_wall_rect;
+
 typedef struct map_data
 {
 	int fd;
 	char **map;
-} t_map_data;
+	void *mlx_ptr;
+	void *mlx_win;
+	int   p_height;
+	int   p_widht;
+	t_img_data	*player_img;
+	t_img_data	*wall_img;
+	t_img_data	*background_img;
+	t_rect_player *r_play;
+	t_wall_rect	  *r_wall;
+}	t_map_data;
+
+int draw_player_rect(t_map_data *data);
+void	draw_background(t_map_data *data);
 #endif
