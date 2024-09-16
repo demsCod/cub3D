@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:12:40 by mdembele          #+#    #+#             */
-/*   Updated: 2024/09/16 21:06:51 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/09/16 22:38:18 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct map_data
 	void *mlx_win;
 	int   p_height;
 	int   p_widht;
+	int   w_height;
+	int   w_widht;
 	t_img_data	*player_img;
 	t_img_data	*wall_img;
 	t_img_data	*background_img;
