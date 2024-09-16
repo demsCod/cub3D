@@ -1,5 +1,25 @@
 #include "../includes/cub3D.h"
 
+int check_item(char **str)
+{
+	int i;
+	int j;
+
+	j = 0;
+	while (str[j])
+	{
+		i = 0;
+		while (str[j][i])
+		{
+			if (str[j][i] != '1' && str[j][i] != '0' && str[j][i] != 'N')
+				return(EXIT_FAILURE);
+			i++;
+		}
+		j++;	
+	}
+	return (EXIT_SUCCESS);
+	
+}
 int parse_map_error(t_map_data *data)
 {
     char *str;
@@ -16,7 +36,8 @@ int parse_map_error(t_map_data *data)
        temp = ft_re_strjoin(temp, str);
     }
     data->map = ft_split(temp, '\n');
-    if (check_item == EXIT_FAILURE)
+    if (check_item(data->map) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
     return(0);
     
 }
