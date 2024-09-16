@@ -61,8 +61,6 @@ int	parse_map_error(t_map_data *data)
 		temp = ft_re_strjoin(temp, str);
 	}
 	data->map = ft_split(temp, '\n');
-	if (check_item(data->map) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
 	return (0);
 }
 

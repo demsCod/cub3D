@@ -9,11 +9,12 @@ void	img_pix_put(t_img_data *img, int x, int y, int color)
 }
 void drawing_wall(t_map_data *data, int x, int y)
 {
-	data->w_widht = 20;
-	data->w_height = 20;
+	data->w_widht = 30;
+	data->w_height = 30;
+	int i;
+	int j;
 
-	int i = 0;
-	int j = 0;
+	i = y;
 	while (i < y + data->w_height)
 	{
 		j = x;
@@ -39,9 +40,9 @@ void	draw_wall(t_map_data *data)
 		i = 0;
 		while (data->map[j][i])
 		{
-			if(data->map[j][i] == WALL)
+			if (data->map[j][i] == WALL)
 			{
-				drawing_wall(data, i * 20, j *20);
+				drawing_wall(data, j * 30, i * 30);
 			}
 			i++;
 		}
@@ -64,7 +65,7 @@ void	draw_background(t_map_data *data)
 		i = 0;
 		while (i < 1080)
 		{
-			img_pix_put(data->background_img, j, i, 0X7CFC00);
+			img_pix_put(data->background_img, j, i, 0X000000);
 			i++;
 		}
 		j++;
@@ -80,8 +81,8 @@ int	draw_player_rect(t_map_data *data)
 	unsigned int i;
 	unsigned int j;
 
-	data->p_widht = 30;
-	data->p_height = 30;
+	data->p_widht = 10;
+	data->p_height = 10;
 
 	i = data->r_play->y;
 	while (i < data->r_play->y + data->p_height)
@@ -89,7 +90,7 @@ int	draw_player_rect(t_map_data *data)
 		j = data->r_play->x;
 		while (j < data->r_play->x + data->p_widht)
 		{
-			img_pix_put(data->background_img, i, j, RED_PIXEL);
+			img_pix_put(data->background_img, i, j, 0XFFFFFF);
 			j++;
 		}
 		++i;
