@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:12:40 by mdembele          #+#    #+#             */
-/*   Updated: 2024/07/08 19:30:05 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:23:51 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 # include "../mlx/mlx_int.h"
+# include "struct.h"
+# include "../libft/libft.h"
 # include <errno.h>
 # include <stdbool.h>
 
@@ -30,9 +32,4 @@
 # define MAP_KO "Error\nThe map is not correct"
 # define WINDOWSFAIL "Error\nWindows initiation failed"
 
-typedef struct map_data
-{
-	int fd;
-	char **map;
-} t_map_data;
 #endif

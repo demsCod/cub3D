@@ -1,0 +1,13 @@
+{
+	"C_Cpp.errorSquiggles": "disabled",
+	"files.associations": {
+		"libft.h": "c",
+		"ft_printf.h": "c",
+		"get_next_line.h": "c",
+		"unistd.h": "c",
+		"error.h": "c"
+	},
+	"cSpell.words": [
+		"lhexa"
+	]
+}

@@ -3,30 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 15:44:10 by mdembele          #+#    #+#             */
-/*   Updated: 2024/05/23 20:23:45 by mdembele         ###   ########.fr       */
+/*   Created: 2024/03/31 22:34:14 by ibaby             #+#    #+#             */
+/*   Updated: 2024/09/16 17:01:38 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include "libft.h"
+#include <stddef.h>
 
-void	*ft_memset(void *pointer, int value, size_t count)
+void	*ft_memset(void *adress, int value, size_t hmany)
 {
-	unsigned char	*valuex;
-	size_t			i;
+	unsigned char	*tab;
 
-	i = 0;
-	valuex = pointer;
-	while (count > 0)
-	{
-		valuex[i] = value;
-		i++;
-		count--;
-	}
-	return (valuex);
+	tab = adress;
+	while (hmany--)
+		*tab++ = value;
+	return (adress);
 }

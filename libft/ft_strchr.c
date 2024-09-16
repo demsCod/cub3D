@@ -3,30 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 15:42:20 by mdembele          #+#    #+#             */
-/*   Updated: 2024/07/07 22:20:30 by mdembele         ###   ########.fr       */
+/*   Created: 2024/03/31 22:34:16 by ibaby             #+#    #+#             */
+/*   Updated: 2024/06/19 22:53:25 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *str, int c)
 {
-	unsigned char	uc;
+	int		i;
+	char	*retval;
 
-	if (s)
-	{
-		uc = (unsigned char)c;
-		while (*s)
-		{
-			if (*s == uc)
-				return ((char *)s);
-			s++;
-		}
-		if (uc == '\0')
-			return ((char *)s);
-	}
-	return (NULL);
+	i = 0;
+	while (str[i] && str[i] != (unsigned char)c)
+		i++;
+	if (str[i] == '\0' && (unsigned char)c != '\0')
+		return (retval = 0);
+	retval = (char *)str + i;
+	return (retval);
 }

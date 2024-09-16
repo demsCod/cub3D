@@ -3,33 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 15:43:34 by mdembele          #+#    #+#             */
-/*   Updated: 2024/05/20 21:35:30 by mdembele         ###   ########.fr       */
+/*   Created: 2024/05/19 20:14:29 by ibaby             #+#    #+#             */
+/*   Updated: 2024/09/16 17:01:38 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
 
-void	ft_putnbr_fd(int n, int fd)
+static int	put_more_than_10(int c, int fd);
+
+int	ft_putnbr_fd(int n, int fd)
 {
-	long long int	v;
+	long	c;
+	int		check;
+	int		temp;
 
-	v = n;
-	if (v < 0)
+	free((c = (long)n, check = 0, temp = 0, NULL));
+	if (c < 0)
 	{
-		ft_putchar_fd('-', fd);
-		v *= -1;
+		if (ft_putchar_fd('-', fd) == -1)
+			return (-1);
+		free((++check, c = -c, NULL));
 	}
-	if (v >= 0 && v <= 9)
-		ft_putchar_fd(v + '0', fd);
-	else
+	if (c >= 10)
 	{
-		ft_putnbr_fd(v / 10, fd);
-		ft_putchar_fd(v % 10 + '0', fd);
+		temp = put_more_than_10(c, fd);
+		if (temp == -1)
+			return (-1);
+		check += temp;
 	}
+	else if (c <= 9)
+	{
+		if (ft_putchar_fd((c + 48), fd) == -1)
+			return (-1);
+		++check;
+	}
+	return (check);
+}
+
+static int	put_more_than_10(int c, int fd)
+{
+	int	temp;
+	int	check;
+
+	temp = 0;
+	check = 0;
+	temp = ft_putnbr_fd((c / 10), fd);
+	if (temp == -1)
+		return (-1);
+	check += temp;
+	temp = ft_putnbr_fd((c % 10), fd);
+	if (temp == -1)
+		return (-1);
+	check += temp;
+	return (check);
 }

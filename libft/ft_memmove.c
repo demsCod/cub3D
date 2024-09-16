@@ -3,46 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 16:54:27 by mdembele          #+#    #+#             */
-/*   Updated: 2024/05/23 21:33:33 by mdembele         ###   ########.fr       */
+/*   Created: 2024/03/31 22:34:12 by ibaby             #+#    #+#             */
+/*   Updated: 2024/09/16 17:01:38 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
 
-void	*ft_memmove(void *dest, const void *src, size_t size)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	const unsigned char	*n_src;
-	unsigned char		*n_dest;
-	size_t				i;
+	unsigned char	s[8192];
 
-	i = size;
-	n_src = (const unsigned char *)src;
-	n_dest = (unsigned char *)dest;
-	if (src < dest)
-	{
-		while (i--)
-			n_dest[i] = n_src[i];
-	}
-	else
-		ft_memcpy(n_dest, n_src, size);
-	return (n_dest);
+	ft_memcpy(s, src, n);
+	ft_memcpy(dest, s, n);
+	return (dest);
 }
-
-/*int main(void)
-{
-	char	src[] = "lorem ipsum dolor sit amet";
-	char	*dest;
-
-	dest = src + 1;
-	if (dest != ft_memmove(dest, src, 8))
-			write(1, "dest's adress was not returned\n", 31);
-		write(1, dest, 22);
-}
-*/

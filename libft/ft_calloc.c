@@ -3,33 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 15:48:09 by mdembele          #+#    #+#             */
-/*   Updated: 2024/05/23 22:49:25 by mdembele         ###   ########.fr       */
+/*   Created: 2024/03/31 22:33:28 by ibaby             #+#    #+#             */
+/*   Updated: 2024/09/16 17:09:04 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stddef.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-void	*ft_calloc(size_t elementCount, size_t elementSize)
+void	*ft_calloc(size_t el_count, size_t el_size)
 {
-	void		*s;
-	long long	test;
+	unsigned char	*buffer;
 
-	test = elementCount + elementSize;
-	if ((long long)elementSize + (long long)elementCount != test
-		|| ((long long)elementCount < 0 && (long long)elementSize < 0))
+	buffer = ft_malloc(el_size * el_count);
+	if (!buffer)
 		return (NULL);
-	if ((long long)elementCount * (long long)elementSize < 0)
-		return (NULL);
-	s = malloc(elementSize * elementCount);
-	if (!(s))
-		return (NULL);
-	ft_bzero(s, elementCount * elementSize);
-	return (s);
+	buffer = ft_memset(buffer, 0, (el_count * el_size));
+	return (buffer);
 }
