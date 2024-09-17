@@ -79,6 +79,13 @@ typedef struct map_data
 	t_wall_rect	  *r_wall;
 }	t_map_data;
 
-int draw_player_rect(t_map_data *data);
+void	img_pix_put(t_img_data *img, int x, int y, int color);
+int     draw_player_rect(t_map_data *data);
 void	draw_background(t_map_data *data);
+void	draw_wall(t_map_data *data);
+void    drawing_wall(t_map_data *data, int x, int y);
+int	    keyfonction(int keycode, t_map_data *data);
+void	init_game(t_map_data *data);
+int	    create_map(t_map_data *data);
+int     find_player(t_map_data *data, char option);
 #endif

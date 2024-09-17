@@ -23,8 +23,10 @@ SRC_PATH = ./srcs
 LIBFTPATH = ./libft
 
 FILES = srcs/main.c \
+		srcs/command/keyboard.c	 \
 		srcs/mapping/draw_rect.c \
-		
+		srcs/mapping/init_pos.c  \
+
 
 
 INCLUDES = -I/usr/include -lmlx -lft -I./includes

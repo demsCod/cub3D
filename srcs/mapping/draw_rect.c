@@ -7,6 +7,7 @@ void	img_pix_put(t_img_data *img, int x, int y, int color)
 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int *)pixel = color;
 }
+
 void drawing_wall(t_map_data *data, int x, int y)
 {
 	data->w_widht = 30;
@@ -30,70 +31,70 @@ void drawing_wall(t_map_data *data, int x, int y)
 
 void	draw_wall(t_map_data *data)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 
-	i = 0;
-	j = 0;
-	while(data->map[j])
+	x = 0;
+	y = 0;
+	while(data->map[y])
 	{
-		i = 0;
-		while (data->map[j][i])
+		x = 0;
+		while (data->map[y][x])
 		{
-			if (data->map[j][i] == WALL)
+			if (data->map[y][x] == WALL)
 			{
-				drawing_wall(data, j * 30, i * 30);
+				drawing_wall(data, y * 30, x * 30);
 			}
-			i++;
+			x++;
 		}
-		j++;
+		y++;
 	}
 
 }
+
+int	draw_player_rect(t_map_data *data)
+{
+	unsigned int y;
+	unsigned int x;
+
+	data->p_widht = 10;
+	data->p_height = 10;
+
+	y = data->r_play->y;
+	while (y < data->r_play->y + data->p_height)
+	{
+		x = data->r_play->x;
+		while (x < data->r_play->x + data->p_widht)
+		{
+			img_pix_put(data->background_img, x, y, 0XFFFFFF);
+			x++;
+		}
+		++y;
+	}
+	return (0);
+}
 void	draw_background(t_map_data *data)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 
-	i = 0;
-	j = 0;
+	y = 0;
+	x = 0;
 	data->background_img->addr = mlx_get_data_addr(data->background_img->mlx_img,
 			&data->background_img->bpp, &data->background_img->line_len,
 			&data->background_img->endian);
-	while (j < 1900)
+	while (y < 1900)
 	{
-		i = 0;
-		while (i < 1080)
+		x = 0;
+		while (x < 1080)
 		{
-			img_pix_put(data->background_img, j, i, 0X000000);
-			i++;
+			img_pix_put(data->background_img, y, x, 0X000000);
+			x++;
 		}
-		j++;
+		y++;
 	}
 	draw_player_rect(data);
 	draw_wall(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 			data->background_img->mlx_img, 0, 0);
-}
-
-int	draw_player_rect(t_map_data *data)
-{
-	unsigned int i;
-	unsigned int j;
-
-	data->p_widht = 10;
-	data->p_height = 10;
-
-	i = data->r_play->y;
-	while (i < data->r_play->y + data->p_height)
-	{
-		j = data->r_play->x;
-		while (j < data->r_play->x + data->p_widht)
-		{
-			img_pix_put(data->background_img, i, j, 0XFFFFFF);
-			j++;
-		}
-		++i;
-	}
-	return (0);
 }
