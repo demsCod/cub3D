@@ -93,7 +93,6 @@ void	draw_background(t_map_data *data)
 		}
 		y++;
 	}
-	draw_player_rect(data);
 	draw_wall(data);
 	y = 0;
 	x = 0;
@@ -108,6 +107,7 @@ void	draw_background(t_map_data *data)
 		}
 		y++;
 	}
+	draw_player_rect(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 			data->background_img->mlx_img, 0, 0);
 }
