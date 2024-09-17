@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:12:40 by mdembele          #+#    #+#             */
-/*   Updated: 2024/09/16 22:38:18 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:54:13 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 #define BLUE_PIXEL 0x000000FF
 #define BLACK_PIXEL 0x000000
 #define GREEN_PIXEL 0X00FF00
+#define WHITE_PIXEL 0XFFFFFF
+#define GREY_PIXEL 0X808080
 
 # define WALL '1'
 # define GROUND '0'

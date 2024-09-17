@@ -95,6 +95,19 @@ void	draw_background(t_map_data *data)
 	}
 	draw_player_rect(data);
 	draw_wall(data);
+	y = 0;
+	x = 0;
+	while (y < 1900)
+	{
+		x = 0;
+		while (x < 1080)
+		{
+			if (x % 30 == 0 || y % 30 == 0)
+				img_pix_put(data->background_img, y, x, GREY_PIXEL);
+			x++;
+		}
+		y++;
+	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 			data->background_img->mlx_img, 0, 0);
 }
