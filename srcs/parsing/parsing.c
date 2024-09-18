@@ -6,36 +6,52 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:38:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/17 13:02:02 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 18:01:20 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	get_map(t_map *map, char *map_path)
+int	parse_map(char **map)
 {
-	char	**file;
-	int		i;
+	
+}
 
-	map->map_fd = open_map(map_path);
-	if (map->map_fd == -1)
-		return (EXIT_FAILURE);
-	file = read_file(map->map_fd);
-	if (file == NULL || file[0] == NULL)
-		return (ft_free(file), EXIT_FAILURE);
+int	get_file_infos(char **file, t_map *map)
+{
+	int	i;
+
 	i = 0;
 	while (ft_strcmp(file[i], "\n") == 0)
 		++i;
 	while (need_more_info(map) == true)
 	{
-		add_infos(file[i++], map);
-		while (ft_strcmp(file[i], "\n") == 0)
+		if (file[i] == NULL)
+			return (print_err("cannot find all the infos", false), EXIT_FAILURE);
+		if (add_infos(file[i++], map) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+		while (file[i] != NULL && ft_strcmp(file[i], "\n") == 0)
 			++i;
 	}
 	map->map = strdup2d(&file[i]);
 	if (map->map == NULL/*  || parse_map(map->map) == EXIT_FAILURE */)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
+}
+
+int	get_map(t_map *map, char *map_path)
+{
+	char	**file;
+
+	map->map_fd = open_map(map_path);
+	if (map->map_fd == -1)
+		return (EXIT_FAILURE);
+	file = str2d_file(map->map_fd);
+	if (file == NULL || file[0] == NULL)
+		return (ft_free(file), EXIT_FAILURE);
+	if (get_file_infos(file, map) == EXIT_FAILURE)
+		return (free_2d_str(file), EXIT_FAILURE);
+	return (free_2d_str(file), EXIT_SUCCESS);
 }
 
 int	add_infos(char *line, t_map *map)

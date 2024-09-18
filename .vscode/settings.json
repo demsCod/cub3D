@@ -11,6 +11,7 @@
 		"get_next_line.h": "c",
 		"struct.h": "c",
 		"stdbool.h": "c",
-		"errno.h": "c"
+		"errno.h": "c",
+		"cstdlib": "c"
 	}
 }

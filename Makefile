@@ -63,7 +63,7 @@ clean :
 
 fclean : clean
 		@make fclean -sC $(LIBFTPATH)
-		@rm $(NAME)
+		@rm -f $(NAME)
 		@echo "$(RED)remove $(NAME) 🚮$(END)"
 
 s :

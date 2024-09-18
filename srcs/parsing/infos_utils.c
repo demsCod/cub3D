@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/17 11:50:34 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 17:11:04 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*get_info(char *line)
 	if (ft_strchr(line, ' ') == NULL)
 		return (double_err("unrecognized info: ", line, false), NULL);
 	line = ft_strchr(line, ' ');
-	while (is_space(line[i]))
+	while (line[i] == ' ')
 		++i;
 	info = ft_strdup(&line[i]);
 	if (info == NULL)
@@ -57,7 +57,7 @@ char	*get_info(char *line)
 	i = -1;
 	while (info[++i])
 	{
-		if (is_whitespace(info[i]) == true)
+		if (info[i] == true)
 			return (double_err("unexpected whitespace in info: ", info, false),
 				free(info), NULL);
 	}
