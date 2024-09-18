@@ -6,11 +6,15 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:12:40 by mdembele          #+#    #+#             */
-/*   Updated: 2024/09/16 18:33:21 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/17 11:41:35 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# include "includes.h"
+
+int		get_map(t_map *map, char *map_path);
 
 #endif

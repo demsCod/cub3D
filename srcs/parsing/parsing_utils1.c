@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 16:51:29 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/17 12:37:44 by ibaby            ###   ########.fr       */
+/*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
+/*   Updated: 2024/09/17 11:59:42 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "parsing.h"
 
-# include "../../includes/cub3D.h"
+int	open_map(char *map_path)
+{
+	int		fd;
+	char	*last_dot;
 
-int		get_map(t_map *map, char *map_path);
-int		open_map(char *map_path);
-
-char	*get_info(char *line);
-int		info_to_map(char *info, t_map *map, char *type);
-bool	need_more_info(t_map *map);
-int		add_infos(char *line, t_map *map);
-
-#endif
+	last_dot = ft_strrchr(map_path, '.');
+	if (last_dot == NULL)
+		return (double_err(map_path, ": invalid map format",
+			false), -1);
+	if (ft_strcmp(last_dot, ".cub") != 0)
+		return (-1);
+	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+		return (print_err("open_map: open: ", true), -1);
+	return (fd);
+}

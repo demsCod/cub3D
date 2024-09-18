@@ -20,11 +20,14 @@ MlX_FLAGS = -Lmlx -Imlx -lmlx -framework OpenGL -framework AppKit
 
 SRC_PATH = ./srcs
 
-LIBFTPATH = ./libft
+LIBFTPATH = $(SRC_PATH)/libft
 
-FILES = srcs/main.c \
-		
-
+FILES = srcs/main.c	\
+		srcs/parsing/parsing.c	\
+		srcs/parsing/parsing_utils1.c	\
+		srcs/parsing/infos_utils.c	\
+		srcs/errors/print_errors.c	\
+		srcs/errors/error_utils.c	\
 
 INCLUDES = -I/usr/include -lmlx -lft -I./includes
 
@@ -32,21 +35,20 @@ OBJ = $(FILES:.c=.o)
 
 LIBFT = $(LIBFTPATH)/libft.a
 
-
 LIBMLX = libmx_linux.a
 
 
 all : $(LIBMLX)  $(LIBFT) $(NAME)
 
 $(NAME) : 	$(OBJ)
-			@$(CC) $(FLAGS)  $(OBJ) $(INCLUDES) -L $(LIBFTPATH) -lft -L ./mlx -lmlx -lXext -lX11 -o $(NAME)
-			@echo "$(GREEN)$(NAME) done ✅$(END)"
+		@$(CC) $(FLAGS)  $(OBJ) $(INCLUDES) -L $(LIBFTPATH) -lft -L ./mlx -lmlx -lXext -lX11 -o $(NAME)
+		@echo "$(GREEN)$(NAME) done ✅$(END)"
 
 $(LIBMLX) :
-			@make -C ./mlx
+		@make -sC ./mlx
 
 $(LIBFT) :
-			@make -C $(LIBFTPATH)
+		@make -sC $(LIBFTPATH)
 
 %.o: %.c
 		@$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
@@ -54,14 +56,18 @@ $(LIBFT) :
 
 
 clean :
-			@make clean -C $(LIBFTPATH)
-			@make clean -C ./mlx
-			@rm $(foreach dir, $(SRC_PATH), $(dir)/*.o)
-			@echo "$(RED)remove objects 🚮$(END)"
+		@make clean -sC $(LIBFTPATH)
+#		@make clean -C ./mlx
+		@rm -f $(OBJ)
+		@echo "$(RED)remove objects 🚮$(END)"
 
 fclean : clean
-			@make fclean -C $(LIBFTPATH)
-			@rm $(NAME)
-			@echo "$(RED)remove $(NAME) 🚮$(END)"
+		@make fclean -sC $(LIBFTPATH)
+		@rm $(NAME)
+		@echo "$(RED)remove $(NAME) 🚮$(END)"
+
+s :
+		@make -sC $(LIBFTPATH)
+		@make -s
 
 re:	fclean all
