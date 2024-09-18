@@ -28,6 +28,7 @@ FILES = srcs/main.c	\
 		srcs/parsing/infos_utils.c	\
 		srcs/errors/print_errors.c	\
 		srcs/errors/error_utils.c	\
+		srcs/errors/free_and_exit.c	\
 
 INCLUDES = -I/usr/include -lmlx -lft -I./includes
 

@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:38:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 20:29:19 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 20:59:46 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ int	parse_map(char **map, t_map *map_data)
 		while (map[j][++i] != '\0')
 		{
 			if (map[j][i] == '0')
-			{
 				if (check_if_closed(map, j, i) == EXIT_FAILURE)
-					return (print_err("map not closed", false),
-						EXIT_FAILURE);
-			}
-			else if (check_map_char(map[j][i], map_data) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
+				{
+					print_err("map is not closed", false);
+					return (EXIT_FAILURE);
+				}
+			if (map[j][i] != '0')
+				if (check_map_char(map[j][i], map_data) == EXIT_FAILURE)
+					return (EXIT_FAILURE);
 		}
 	}
 	return (EXIT_SUCCESS);
@@ -56,7 +57,7 @@ int	get_file_infos(char **file, t_map *map)
 	}
 	map->map = strdup2d(&file[i]);
 	if (map->map == NULL || parse_map(map->map, map) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (ft_free(map->map), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

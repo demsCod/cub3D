@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 20:19:15 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 21:03:44 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int	main(int ac, char **av)
 	printf("\nmap:\n---------------------\n");
 	print_2d_array_nl(map.map);
 	printf("\n---------------------\n");
+	free_and_exit(EXIT_SUCCESS, &map);
 	return (EXIT_SUCCESS);
 }
