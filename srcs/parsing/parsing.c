@@ -6,15 +6,33 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:38:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 18:01:20 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 19:05:48 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	parse_map(char **map)
+int	parse_map(char **map, t_map)
 {
-	
+	int	i;
+	int	j;
+
+	j = -1;
+	while (map[++j] != NULL)
+	{
+		i = -1;
+		while (map[j][++i] != '\0')
+		{
+			if (map[j][i] == '0')
+			{
+				if (check_if_closed(map, j, i) == EXIT_FAILURE)
+					return (EXIT_FAILURE);
+			}
+			else if (check_map_char(map, j , i) == EXIT_FAILURE)
+				return (EXIT_FAILURE);
+		}
+	}
+	return (EXIT_SUCCESS)
 }
 
 int	get_file_infos(char **file, t_map *map)

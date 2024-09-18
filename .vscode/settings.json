@@ -12,6 +12,9 @@
 		"struct.h": "c",
 		"stdbool.h": "c",
 		"errno.h": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"mlx.h": "c",
+		"sysmacros.h": "c",
+		"mlx_int.h": "c"
 	}
 }
