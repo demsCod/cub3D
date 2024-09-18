@@ -15,6 +15,7 @@
 		"cstdlib": "c",
 		"mlx.h": "c",
 		"sysmacros.h": "c",
-		"mlx_int.h": "c"
+		"mlx_int.h": "c",
+		"stdio.h": "c"
 	}
 }

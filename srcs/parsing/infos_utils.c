@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 17:11:04 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 20:33:52 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int	info_to_map(char *info, t_map *map, char *type)
 	if (*target != NULL)
 		return (print_err("duplicate element", false), free(info),
 			EXIT_FAILURE);
+	if (ft_strcmp(type, "F") == 0 || ft_strcmp(type, "C") == 0)
+		info = ft_re_strtrim(info, " ");
+	if (info == NULL)
+		return (print_err("info_to_map: strtrim failed", false), EXIT_FAILURE);
 	*target = info;
 	return (EXIT_SUCCESS);
 }

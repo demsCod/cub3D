@@ -6,13 +6,13 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:38:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 19:05:48 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 20:29:19 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	parse_map(char **map, t_map)
+int	parse_map(char **map, t_map *map_data)
 {
 	int	i;
 	int	j;
@@ -21,18 +21,21 @@ int	parse_map(char **map, t_map)
 	while (map[++j] != NULL)
 	{
 		i = -1;
+		if (map[j + 1] != NULL)
+			map[j][ft_strlen(map[j]) - 1] = '\0';
 		while (map[j][++i] != '\0')
 		{
 			if (map[j][i] == '0')
 			{
 				if (check_if_closed(map, j, i) == EXIT_FAILURE)
-					return (EXIT_FAILURE);
+					return (print_err("map not closed", false),
+						EXIT_FAILURE);
 			}
-			else if (check_map_char(map, j , i) == EXIT_FAILURE)
+			else if (check_map_char(map[j][i], map_data) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 	}
-	return (EXIT_SUCCESS)
+	return (EXIT_SUCCESS);
 }
 
 int	get_file_infos(char **file, t_map *map)
@@ -52,7 +55,7 @@ int	get_file_infos(char **file, t_map *map)
 			++i;
 	}
 	map->map = strdup2d(&file[i]);
-	if (map->map == NULL/*  || parse_map(map->map) == EXIT_FAILURE */)
+	if (map->map == NULL || parse_map(map->map, map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

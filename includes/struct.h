@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:55:38 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/17 12:23:04 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 19:49:44 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ typedef struct s_map
 	char	*cei_texture;
 	char	**map;
 	int		map_fd;
-	int		player_direction;
+	char	player_direction;
 }	t_map;
+
+typedef struct s_player
+{
+	char	initial_direction;
+}	t_player;
 
 #endif

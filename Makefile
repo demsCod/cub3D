@@ -40,7 +40,7 @@ LIBMLX = libmx_linux.a
 
 all : $(LIBMLX)  $(LIBFT) $(NAME)
 
-$(NAME) : 	$(OBJ)
+$(NAME) : $(OBJ)
 		@$(CC) $(FLAGS)  $(OBJ) $(INCLUDES) -L $(LIBFTPATH) -lft -L ./mlx -lmlx -lXext -lX11 -o $(NAME)
 		@echo "$(GREEN)$(NAME) done ✅$(END)"
 
@@ -68,6 +68,6 @@ fclean : clean
 
 s :
 		@make -sC $(LIBFTPATH)
-		@make -s
+		@make all -s
 
 re:	fclean all

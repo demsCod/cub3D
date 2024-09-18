@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:32:32 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/17 10:00:16 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 19:46:31 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@
 # define OPEN_FAIL "Error\nOpen failed"
 # define MAP_KO "Error\nThe map is not correct"
 # define WINDOWSFAIL "Error\nWindows initiation failed"
-
 
 #endif
