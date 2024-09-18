@@ -17,16 +17,24 @@
 # include "../mlx/mlx_int.h"
 # include <errno.h>
 # include <stdbool.h>
+# include <sys/sysmacros.h>
+# include <math.h>
 
+
+# define PI 3.1415926535
+# define RECT_P_SIZE 10
+# define RECT_WALL_SIZE 30
+# define SCREEN_WIDHT_SIZE 1900
+# define SCREEN_HEIGHT_SIZE 1080
 # define KEYPRESS 2
 # define KEYRELEASE 3
 
 #define RED_PIXEL 0xFF0000
 #define BLUE_PIXEL 0x000000FF
-#define BLACK_PIXEL 0x000000
 #define GREEN_PIXEL 0X00FF00
 #define WHITE_PIXEL 0XFFFFFF
 #define GREY_PIXEL 0X808080
+#define BLACK_PIXEL 0X000000
 
 # define WALL '1'
 # define GROUND '0'
@@ -50,6 +58,9 @@ typedef struct s_player_rect
 {
     float	x;
     float	y;
+    float   d_y;
+    float   d_x;
+    float   a;
     int width;
     int height;
     int color;
@@ -90,4 +101,5 @@ int	    keyfonction(int keycode, t_map_data *data);
 void	init_game(t_map_data *data);
 int	    create_map(t_map_data *data);
 int     find_player(t_map_data *data, char option);
+void    raycasting(t_map_data *data);
 #endif

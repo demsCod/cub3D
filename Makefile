@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra -g3
+FLAGS = -Wall -Werror -Wextra -g3 -no-pie 
 
 MlX_FLAGS = -Lmlx -Imlx -lmlx -framework OpenGL -framework AppKit
 
@@ -22,10 +22,11 @@ SRC_PATH = ./srcs
 
 LIBFTPATH = ./libft
 
-FILES = srcs/main.c \
-		srcs/command/keyboard.c	 \
+FILES =	srcs/command/keyboard.c	 \
 		srcs/mapping/draw_rect.c \
 		srcs/mapping/init_pos.c  \
+		srcs/main.c \
+		srcs/raycasting/raycasting.c \
 
 
 
@@ -42,7 +43,7 @@ LIBMLX = libmx_linux.a
 all : $(LIBMLX)  $(LIBFT) $(NAME)
 
 $(NAME) : 	$(OBJ)
-			@$(CC) $(FLAGS)  $(OBJ) $(INCLUDES) -L $(LIBFTPATH) -lft -L ./mlx -lmlx -lXext -lX11 -o $(NAME)
+			@$(CC) $(FLAGS)  $(OBJ) $(INCLUDES) -L $(LIBFTPATH) -lft -L ./mlx -lmlx -lXext -lX11 -o $(NAME) -lm
 			@echo "$(GREEN)$(NAME) done ✅$(END)"
 
 $(LIBMLX) :
