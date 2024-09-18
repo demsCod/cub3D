@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 20:33:52 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 21:43:09 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,14 @@ char	*get_info(char *line)
 	char	*info;
 
 	i = 0;
-	if (ft_strchr(line, ' ') == NULL)
+	if (ft_strchr(line, ' ') == NULL && ft_strchr(line, '\t'))
 		return (double_err("unrecognized info: ", line, false), NULL);
-	line = ft_strchr(line, ' ');
-	while (line[i] == ' ')
+	while (line[i] != ' ' && line[i] != '\t' && line[i] != '\0')
 		++i;
+	while (line[i] == ' ' || line[i] =='\t')
+		++i;
+	if (line[i] == '\0' || line[i] == '\n')
+		return (double_err("unrecognized info: ", line, false), NULL);
 	info = ft_strdup(&line[i]);
 	if (info == NULL)
 		return (NULL);

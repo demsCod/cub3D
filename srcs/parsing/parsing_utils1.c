@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 20:15:56 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/18 21:36:45 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ int	check_if_closed(char **map, int j, int i)
 		return (EXIT_FAILURE);
 	if (map[j - 1][i] == ' ' || map[j + 1][i] == ' ')
 		return (EXIT_FAILURE);
-	if (map[j - 1][i - 1] == ' ' || map[j - 1][i + 1] == ' ')
-		return (EXIT_FAILURE);
-	if (map[j + 1][i - 1] == ' ' || map[j + 1][i + 1] == ' ')
-		return (EXIT_FAILURE);
+	// - check des diagonales
+	// if (map[j - 1][i - 1] == ' ' || map[j - 1][i + 1] == ' ')
+	// 	return (EXIT_FAILURE);
+	// if (map[j + 1][i - 1] == ' ' || map[j + 1][i + 1] == ' ')
+	// 	return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
