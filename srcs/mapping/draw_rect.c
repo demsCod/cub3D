@@ -107,9 +107,10 @@ int	draw_player_rect(t_map_data *data)
 	unsigned int x;
 	int player_center_x;
 	int player_center_y;
-	int line_length;
+	double line_length;
 	int line_end_x;
 	int line_end_y;
+	bool hit_wall = false;
 
 	data->p_widht = RECT_P_SIZE;
 	data->p_height = RECT_P_SIZE;
@@ -127,12 +128,30 @@ int	draw_player_rect(t_map_data *data)
 		}
 		++y;
 	}
-
-	line_length = 50; 
-	line_end_x = player_center_x + cos(data->r_play->a) * line_length;
-	line_end_y = player_center_y - sin(data->r_play->a) * line_length;
-	draw_line(data->background_img, player_center_x, player_center_y, line_end_x, line_end_y, RED_PIXEL);
-
+	line_length = 0.1;
+	printf("-------------------NEW_MOUVEMENT-----------------------\n");
+	
+	while (hit_wall == false)
+	{
+		line_end_x = player_center_x + cos(data->r_play->a) * line_length;
+		line_end_y = player_center_y - sin(data->r_play->a) * line_length;
+		if (line_end_x % RECT_WALL_SIZE == 0 || line_end_y % RECT_WALL_SIZE == 0)
+		{
+			y = line_end_y / RECT_WALL_SIZE;
+			x = line_end_x / RECT_WALL_SIZE;
+			printf("line x = %d, line y = %d\n", x, y);
+			printf("line x y = %c\n", data->map[y][x]);
+			if (y < SCREEN_HEIGHT_SIZE && x < SCREEN_WIDHT_SIZE)
+			{
+				if (data->map[y][x] == WALL)
+					hit_wall = true;
+			}
+		}
+		if (!hit_wall)
+			line_length+=1.0;
+	}
+	//draw_line(data->background_img, player_center_x, player_center_y, line_end_x, line_end_y, RED_PIXEL);
+	draw_line(data->background_img, player_center_x, player_center_y, line_end_x, line_end_y, GREEN_PIXEL);
 	return (0);
 }
 

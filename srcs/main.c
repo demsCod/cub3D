@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 		if (create_map(data) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		init_game(data);
+		draw_background(data);
 		mlx_hook(data->mlx_win, 02, (1L << 0), keyfonction, data);
 		mlx_loop(data->mlx_ptr);
 	}
