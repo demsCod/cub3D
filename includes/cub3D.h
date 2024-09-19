@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:12:40 by mdembele          #+#    #+#             */
-/*   Updated: 2024/09/17 15:54:13 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/09/19 21:11:40 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ typedef struct s_player_rect
     float   d_x;
     float   d_y;
     float   a;
+	float   a_y;
+	float   a_x;
+	double camera_X;
+	double camera_Y;
+	double plane_X;
+	double plane_Y;
+	double ray_dir_x;
+	double ray_dir_y;
 }	t_ray_player;
 
 typedef struct map_data

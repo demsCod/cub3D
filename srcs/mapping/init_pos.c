@@ -51,6 +51,8 @@ void	init_game(t_map_data *data)
 	data->r_play->a = 0;
 	data->r_play->d_x = 0;
 	data->r_play->d_y = 0;
+	data->r_play->plane_X = 0.66;
+	data->r_play->plane_Y = 0.0; 
 	data->mlx_ptr = mlx_init();
 	data->mlx_win = mlx_new_window(data->mlx_ptr, SCREEN_WIDHT_SIZE, SCREEN_HEIGHT_SIZE, "CUBE 3D");
 	data->background_img->mlx_img = mlx_new_image(data->mlx_ptr, SCREEN_WIDHT_SIZE, SCREEN_HEIGHT_SIZE);

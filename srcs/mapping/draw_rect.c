@@ -120,6 +120,7 @@ void	draw_background(t_map_data *data)
 
 	y = 0;
 	x = 0;
+	// double cameraX = 2 * data->r_play->x ;
 	data->background_img->addr = mlx_get_data_addr(data->background_img->mlx_img,
 			&data->background_img->bpp, &data->background_img->line_len,
 			&data->background_img->endian);

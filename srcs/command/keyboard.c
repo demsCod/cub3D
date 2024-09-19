@@ -1,5 +1,16 @@
 #include "../../includes/cub3D.h"
 
+void init_camera(t_map_data *data)
+{
+	int x = 0;
+	while (x < SCREEN_WIDHT_SIZE)
+	{
+		data->r_play->camera_X = 2 * x / (double)SCREEN_WIDHT_SIZE - 1;
+		data->r_play->ray_dir_x = data->r_play->d_x + data->r_play->plane_X * data->r_play->camera_X;
+		data->r_play->ray_dir_x = data->r_play->d_y + data->r_play->plane_Y * data->r_play->camera_X;
+		x++;
+	}
+}
 int	keyfonction(int keycode, t_map_data *data)
 {
 	if (keycode == XK_Escape)
@@ -33,6 +44,7 @@ int	keyfonction(int keycode, t_map_data *data)
 		data->r_play->x -= data->r_play->d_x;
 		data->r_play->y -= data->r_play->d_y;
 	}
+	init_camera(data);
 	draw_background(data);
 	return (0);
 }
