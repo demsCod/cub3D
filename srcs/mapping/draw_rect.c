@@ -10,16 +10,14 @@ void	img_pix_put(t_img_data *img, int x, int y, int color)
 
 void drawing_wall(t_map_data *data, int x, int y)
 {
-	data->w_widht = RECT_WALL_SIZE;
-	data->w_height = RECT_WALL_SIZE;
 	int i;
 	int j;
 
 	i = y;
-	while (i < y + data->w_height)
+	while (i < y + RECT_WALL_SIZE)
 	{
 		j = x;
-		while (j < x + data->w_widht)
+		while (j < x + RECT_WALL_SIZE)
 		{
 			img_pix_put(data->background_img, i, j, BLUE_PIXEL);
 			j++;
@@ -43,7 +41,7 @@ void	draw_wall(t_map_data *data)
 		{
 			if (data->map[y][x] == WALL)
 			{
-				drawing_wall(data, y * 30, x * 30);
+				drawing_wall(data, y * RECT_WALL_SIZE, x * RECT_WALL_SIZE);
 			}
 			x++;
 		}
@@ -58,7 +56,6 @@ void draw_line(t_img_data *img, int x1, int y1, int x2, int y2, int color)
 	int sx, sy;
 	int err;
 
-	// Déterminer les directions x et y
 	if (x1 < x2)
 		sx = 1;
 	else
@@ -68,25 +65,18 @@ void draw_line(t_img_data *img, int x1, int y1, int x2, int y2, int color)
 		sy = 1;
 	else
 		sy = -1;
-
-	// Calcul de l'erreur initiale sans ternaire
 	if (dx > dy)
 		err = dx / 2;
 	else
 		err = -dy / 2;
-
 	int e2;
 
 	while (1)
 	{
-		img_pix_put(img, x1, y1, color);  // Placer un pixel à la position courante
-
+		img_pix_put(img, x1, y1, color);  
 		if (x1 == x2 && y1 == y2)
 			break;
-
 		e2 = err;
-
-		// Mise à jour de x1 et y1 en fonction de l'erreur
 		if (e2 > -dx)
 		{
 			err -= dy;
@@ -103,57 +93,25 @@ void draw_line(t_img_data *img, int x1, int y1, int x2, int y2, int color)
 
 int	draw_player_rect(t_map_data *data)
 {
-	unsigned int y;
-	unsigned int x;
-	int player_center_x;
-	int player_center_y;
-	double line_length;
-	int line_end_x;
-	int line_end_y;
-	bool hit_wall = false;
-
-	data->p_widht = RECT_P_SIZE;
-	data->p_height = RECT_P_SIZE;
-
-	player_center_x = data->r_play->x + data->p_widht / 2;
-	player_center_y = data->r_play->y + data->p_height / 2;
+	int y;
+	int x;
+	
 	y = data->r_play->y;
-	while (y < data->r_play->y + data->p_height)
+	while (y < data->r_play->y + RECT_P_SIZE)
 	{
 		x = data->r_play->x;
-		while (x < data->r_play->x + data->p_widht)
+		while (x < data->r_play->x + RECT_P_SIZE)
 		{
 			img_pix_put(data->background_img, x, y, WHITE_PIXEL);
 			x++;
 		}
 		++y;
 	}
-	line_length = 0.1;
-	printf("-------------------NEW_MOUVEMENT-----------------------\n");
-	
-	while (hit_wall == false)
-	{
-		line_end_x = player_center_x + cos(data->r_play->a) * line_length;
-		line_end_y = player_center_y - sin(data->r_play->a) * line_length;
-		if (line_end_x % RECT_WALL_SIZE == 0 || line_end_y % RECT_WALL_SIZE == 0)
-		{
-			y = line_end_y / RECT_WALL_SIZE;
-			x = line_end_x / RECT_WALL_SIZE;
-			printf("line x = %d, line y = %d\n", x, y);
-			printf("line x y = %c\n", data->map[y][x]);
-			if (y < SCREEN_HEIGHT_SIZE && x < SCREEN_WIDHT_SIZE)
-			{
-				if (data->map[y][x] == WALL)
-					hit_wall = true;
-			}
-		}
-		if (!hit_wall)
-			line_length+=1.0;
-	}
-	//draw_line(data->background_img, player_center_x, player_center_y, line_end_x, line_end_y, RED_PIXEL);
-	draw_line(data->background_img, player_center_x, player_center_y, line_end_x, line_end_y, GREEN_PIXEL);
 	return (0);
+
 }
+	
+
 
 void	draw_background(t_map_data *data)
 {
@@ -170,10 +128,7 @@ void	draw_background(t_map_data *data)
 		x = 0;
 		while (x < SCREEN_HEIGHT_SIZE)
 		{
-			if (x % 30 == 0 || y % 30 == 0)
-				img_pix_put(data->background_img, y, x, GREY_PIXEL);
-			else
-				img_pix_put(data->background_img, y, x, BLACK_PIXEL);
+			img_pix_put(data->background_img, y, x, BLACK_PIXEL);
 			x++;
 		}
 		y++;
@@ -185,13 +140,14 @@ void	draw_background(t_map_data *data)
 		x = 0;
 		while (x < SCREEN_HEIGHT_SIZE)
 		{
-			if (x % 30 == 0 || y % 30 == 0)
+			if (x % RECT_WALL_SIZE == 0 || y % RECT_WALL_SIZE == 0)
 				img_pix_put(data->background_img, y, x, GREY_PIXEL);
 			x++;
 		}
 		y++;
 	}
 	draw_player_rect(data);
+	draw_head(data);
 	//raycasting(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 			data->background_img->mlx_img, 0, 0);

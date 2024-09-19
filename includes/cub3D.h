@@ -22,10 +22,12 @@
 
 
 # define PI 3.1415926535
+
 # define RECT_P_SIZE 10
 # define RECT_WALL_SIZE 30
 # define SCREEN_WIDHT_SIZE 1900
 # define SCREEN_HEIGHT_SIZE 1080
+# define FOV 60
 # define KEYPRESS 2
 # define KEYRELEASE 3
 
@@ -58,22 +60,10 @@ typedef struct s_player_rect
 {
     float	x;
     float	y;
-    float   d_y;
     float   d_x;
+    float   d_y;
     float   a;
-    int width;
-    int height;
-    int color;
-}	t_rect_player;
-
-typedef struct s_wall_rect
-{
-    float	x;
-    float	y;
-    int width;
-    int height;
-    int color;
-}	t_wall_rect;
+}	t_ray_player;
 
 typedef struct map_data
 {
@@ -88,18 +78,21 @@ typedef struct map_data
 	t_img_data	*player_img;
 	t_img_data	*wall_img;
 	t_img_data	*background_img;
-	t_rect_player *r_play;
-	t_wall_rect	  *r_wall;
+	t_ray_player *r_play;
 }	t_map_data;
 
-void	img_pix_put(t_img_data *img, int x, int y, int color);
+/*drawing*/
+void draw_line(t_img_data *img, int x1, int y1, int x2, int y2, int color);
 int     draw_player_rect(t_map_data *data);
 void	draw_background(t_map_data *data);
 void	draw_wall(t_map_data *data);
+void	img_pix_put(t_img_data *img, int x, int y, int color);
 void    drawing_wall(t_map_data *data, int x, int y);
+int	    create_map(t_map_data *data);
+/*gaming*/
 int	    keyfonction(int keycode, t_map_data *data);
 void	init_game(t_map_data *data);
-int	    create_map(t_map_data *data);
 int     find_player(t_map_data *data, char option);
+void    draw_head(t_map_data *data);
 void    raycasting(t_map_data *data);
 #endif

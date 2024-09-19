@@ -43,7 +43,7 @@ int find_player(t_map_data *data, char option)
 }
 void	init_game(t_map_data *data)
 {
-	data->r_play = malloc(sizeof(t_rect_player));
+	data->r_play = malloc(sizeof(t_ray_player));
 	data->background_img = malloc(sizeof(t_img_data));
 	data->player_img = malloc(sizeof(t_img_data));	
 	data->r_play->y =  find_player(data, 'y') * RECT_WALL_SIZE ;
