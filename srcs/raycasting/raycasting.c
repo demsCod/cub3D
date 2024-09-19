@@ -79,7 +79,6 @@ void draw_head(t_map_data *data)
     line_length = 0.1;
     player_center_x = data->r_play->x + RECT_P_SIZE / 2;
     player_center_y = data->r_play->y + RECT_P_SIZE / 2;
-    printf("%f\n", data->r_play->a);
 	while (line_length < 30)
     {
             line_end_x = player_center_x + cos(a) * line_length;

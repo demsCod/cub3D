@@ -25,8 +25,8 @@
 
 # define RECT_P_SIZE 10
 # define RECT_WALL_SIZE 30
-# define SCREEN_WIDHT_SIZE 1900
-# define SCREEN_HEIGHT_SIZE 1080
+# define SCREEN_WIDHT_SIZE 70
+# define SCREEN_HEIGHT_SIZE 70
 # define FOV 60
 # define KEYPRESS 2
 # define KEYRELEASE 3
@@ -71,6 +71,15 @@ typedef struct s_player_rect
 	double plane_Y;
 	double ray_dir_x;
 	double ray_dir_y;
+	double delta_dist_x;
+	double delta_dist_y;
+	double side_dist_x;
+	double side_dist_y;
+	int 	step_x;
+	int 	step_y;
+	int 	map_x;
+	int side;
+	int		map_y;
 }	t_ray_player;
 
 typedef struct map_data
