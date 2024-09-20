@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:12:40 by mdembele          #+#    #+#             */
-/*   Updated: 2024/09/19 21:11:40 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/09/20 21:16:17 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@
 
 # define RECT_P_SIZE 10
 # define RECT_WALL_SIZE 30
-# define SCREEN_WIDHT_SIZE 70
-# define SCREEN_HEIGHT_SIZE 70
+# define SCREEN_WIDHT_SIZE 1900 
+# define SCREEN_HEIGHT_SIZE 1080 
 # define FOV 60
 # define KEYPRESS 2
 # define KEYRELEASE 3
+# define NUM_TEXTURES 4
 
 #define RED_PIXEL 0xFF0000
 #define BLUE_PIXEL 0x000000FF
@@ -38,6 +39,7 @@
 #define GREY_PIXEL 0X808080
 #define BLACK_PIXEL 0X000000
 
+# define TEXTURE_SIZE 10
 # define WALL '1'
 # define GROUND '0'
 # define PLAYER 'P'
@@ -46,6 +48,14 @@
 # define OPEN_FAIL "Error\nOpen failed"
 # define MAP_KO "Error\nThe map is not correct"
 # define WINDOWSFAIL "Error\nWindows initiation failed"
+
+typedef enum e_cardinal_direction
+{
+	NORTH = 0,
+	SOUTH = 1,
+	WEST = 2,
+	EAST = 3
+}	t_cardinal_direction;
 
 typedef struct o_img
 {
@@ -78,9 +88,21 @@ typedef struct s_player_rect
 	int 	step_x;
 	int 	step_y;
 	int 	map_x;
-	int side;
+	int 	side;
 	int		map_y;
+	double 	wall_dist;
+	double  wall_x;
+	int 	line_height;
+	int 	draw_start;
+	int		 draw_end;
 }	t_ray_player;
+
+typedef struct s_data
+{
+	// ...
+	int *texture_buffer[NUM_TEXTURES];
+} t_draw_data;
+
 
 typedef struct map_data
 {
@@ -96,12 +118,14 @@ typedef struct map_data
 	t_img_data	*wall_img;
 	t_img_data	*background_img;
 	t_ray_player *r_play;
+	t_draw_data  *draw;
 }	t_map_data;
 
 /*drawing*/
-void draw_line(t_img_data *img, int x1, int y1, int x2, int y2, int color);
+void 	draw_line(t_img_data *img, int x1, int y1, int x2, int y2, int color);
 int     draw_player_rect(t_map_data *data);
 void	draw_background(t_map_data *data);
+void 	init_camera(t_map_data *data);
 void	draw_wall(t_map_data *data);
 void	img_pix_put(t_img_data *img, int x, int y, int color);
 void    drawing_wall(t_map_data *data, int x, int y);
@@ -111,5 +135,6 @@ int	    keyfonction(int keycode, t_map_data *data);
 void	init_game(t_map_data *data);
 int     find_player(t_map_data *data, char option);
 void    draw_head(t_map_data *data);
-void    raycasting(t_map_data *data);
+void 	draw_ray(t_map_data *data);
+void 	draw_camera (t_map_data *data, t_ray_player *r_play, t_draw_data *draw, int x);
 #endif

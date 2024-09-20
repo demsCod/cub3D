@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra -g3 -no-pie 
+FLAGS = -Wall -Werror -Wextra -g3  
 
 MlX_FLAGS = -Lmlx -Imlx -lmlx -framework OpenGL -framework AppKit
 
@@ -64,7 +64,7 @@ clean :
 			@echo "$(RED)remove objects 🚮$(END)"
 
 fclean : clean
-			@make fclean -C $(LIBFTPATH)
+			cd@make fclean -C $(LIBFTPATH)
 			@rm $(NAME)
 			@echo "$(RED)remove $(NAME) 🚮$(END)"
 

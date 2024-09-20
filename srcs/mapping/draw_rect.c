@@ -115,41 +115,119 @@ int	draw_player_rect(t_map_data *data)
 
 void	draw_background(t_map_data *data)
 {
-	int	y;
-	int	x;
+	// int	y;
+	// int	x;
 
-	y = 0;
-	x = 0;
-	// double cameraX = 2 * data->r_play->x ;
-	data->background_img->addr = mlx_get_data_addr(data->background_img->mlx_img,
-			&data->background_img->bpp, &data->background_img->line_len,
-			&data->background_img->endian);
-	while (y < SCREEN_WIDHT_SIZE)
+	// y = 0;
+	// x = 0;
+
+	
+	if (data->background_img == NULL)
 	{
-		x = 0;
-		while (x < SCREEN_HEIGHT_SIZE)
-		{
-			img_pix_put(data->background_img, y, x, BLACK_PIXEL);
-			x++;
-		}
-		y++;
+		fprintf(stderr, " get_data_addr fail\n");
+		exit (1);
 	}
-	y = 0;
-	draw_wall(data);
-	while (y < SCREEN_WIDHT_SIZE)
-	{
-		x = 0;
-		while (x < SCREEN_HEIGHT_SIZE)
-		{
-			if (x % RECT_WALL_SIZE == 0 || y % RECT_WALL_SIZE == 0)
-				img_pix_put(data->background_img, y, x, GREY_PIXEL);
-			x++;
-		}
-		y++;
-	}
-	draw_player_rect(data);
-	draw_head(data);
-	//raycasting(data);
+	// while (y < SCREEN_WIDHT_SIZE)
+	// {
+	// 	x = 0;
+	// 	while (x < SCREEN_HEIGHT_SIZE)
+	// 	{
+	// 		img_pix_put(data->background_img, y, x, BLACK_PIXEL);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
+	// draw_wall(data);
+	// y = 0;
+	// while (y < SCREEN_WIDHT_SIZE)
+	// {
+	// 	x = 0;
+	// 	while (x < SCREEN_HEIGHT_SIZE)
+	// 	{
+	// 		if (x % RECT_WALL_SIZE == 0 || y % RECT_WALL_SIZE == 0)
+	// 			img_pix_put(data->background_img, y, x, GREY_PIXEL);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
+	// draw_player_rect(data);
+	// draw_ray(data);
+	// draw_camera(data, data->r_play,  data->draw);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 			data->background_img->mlx_img, 0, 0);
+}
+
+
+void draw_ray(t_map_data *data)
+{
+	int player_center_x;
+    int player_center_y;
+    double line_length;
+    int line_end_x = 1;
+	int line_end_y  = 1;
+	int x;
+    int y;
+    float a;
+    int i;
+	
+    a = data->r_play->a;
+	line_length = 0.1;
+    player_center_x = data->r_play->x + RECT_P_SIZE / 2;
+    player_center_y = data->r_play->y + RECT_P_SIZE / 2;
+	i = 0;
+	while (i < 60)
+    {
+        a+=0.01;
+		if (a < 0)
+			a += 2 * PI;
+        if (a > 2 * PI)
+			a -= 2 * PI;
+        line_length = 0;
+        while (line_length < 900)
+        {
+            line_end_x = player_center_x + cos(a) * line_length;
+            line_end_y = player_center_y + sin(a) * line_length;
+            y = line_end_y / RECT_WALL_SIZE;
+            x = line_end_x / RECT_WALL_SIZE;
+            if (y < SCREEN_HEIGHT_SIZE && x < SCREEN_WIDHT_SIZE)
+            {
+                if (data->map[y][x] == WALL)
+                    break;
+            }
+            line_length+=1.0;
+        }
+		draw_line(data->background_img, player_center_x , player_center_y, line_end_x, line_end_y, GREEN_PIXEL);
+        i++;
+	}
+}
+
+void draw_head(t_map_data *data)
+{
+    int player_center_x;
+    int player_center_y;
+    double line_length;
+    int line_end_x = 1;
+	int line_end_y  = 1;
+	int x;
+    int y;
+    float a;
+
+    a = data->r_play->a;
+    line_length = 0.1;
+    player_center_x = data->r_play->x + RECT_P_SIZE / 2;
+    player_center_y = data->r_play->y + RECT_P_SIZE / 2;
+	while (line_length < 30)
+    {
+            line_end_x = player_center_x + cos(a) * line_length;
+            line_end_y = player_center_y + sin(a) * line_length;
+            y = line_end_y / RECT_WALL_SIZE;
+            x = line_end_x / RECT_WALL_SIZE;
+            if (y < SCREEN_HEIGHT_SIZE && x < SCREEN_WIDHT_SIZE)
+            {
+                if (data->map[y][x] == WALL)
+                    break;
+            }
+            line_length+=1.0;
+    }
+	draw_line(data->background_img, player_center_x , player_center_y, line_end_x, line_end_y, WHITE_PIXEL);
 }
