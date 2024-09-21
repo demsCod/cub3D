@@ -59,8 +59,11 @@ typedef enum e_cardinal_direction
 
 typedef struct o_img
 {
-    void	*mlx_img;
-    char	*addr;
+    void	*img;
+    int	*addr;
+	char	*path;
+	int		widht;
+	int		height;
     int		bpp; /* bits per pixel */
     int		line_len;
     int		endian;
@@ -106,17 +109,33 @@ typedef struct s_data
 
 typedef struct map_data
 {
+	long	floor_hex;
+	long	ceiling_hex;
+	int						col;
+	int						row;
+	char					index;
+	int						start_row;
+	int						start_col;
+	int						start_map;
+	char					*path_texture[4];
+	int						offset;
+	int						**map_int;
+	char **pixels;
 	int fd;
 	char **map;
 	void *mlx_ptr;
 	void *mlx_win;
+	void *mlx_win2;
+	int					*texture_buffer[4];
 	int   p_height;
 	int   p_widht;
 	int   w_height;
 	int   w_widht;
+	bool start;
 	t_img_data	*player_img;
 	t_img_data	*wall_img;
 	t_img_data	*background_img;
+	t_img_data	*background_img2;
 	t_ray_player *r_play;
 	t_draw_data  *draw;
 }	t_map_data;
@@ -137,4 +156,5 @@ int     find_player(t_map_data *data, char option);
 void    draw_head(t_map_data *data);
 void 	draw_ray(t_map_data *data);
 void 	draw_camera (t_map_data *data, t_ray_player *r_play, t_draw_data *draw, int x);
+void init_camera(t_map_data *data);
 #endif

@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra -g3  
+FLAGS = -Wall -Werror -Wextra -g3  -no-pie
 
 MlX_FLAGS = -Lmlx -Imlx -lmlx -framework OpenGL -framework AppKit
 

@@ -43,19 +43,21 @@ int find_player(t_map_data *data, char option)
 }
 void	init_game(t_map_data *data)
 {
+	data->start = false;
+	//data->mlx_ptr = NULL;
+	data->mlx_win = NULL;
 	data->r_play = malloc(sizeof(t_ray_player));
 	data->background_img = malloc(sizeof(t_img_data));
+	//data->background_img->mlx_img = malloc (sizeof(int *));
 	data->player_img = malloc(sizeof(t_img_data));	
 	data->r_play->y =  find_player(data, 'y') * RECT_WALL_SIZE ;
 	data->r_play->x = find_player(data, 'x') * RECT_WALL_SIZE ;
 	data->r_play->a = 0;
 	data->r_play->d_x = 0;
-	data->r_play->d_y = 0;
+	data->r_play->d_y = -1;
 	data->r_play->map_x = 0;
 	data->r_play->map_y = 0;
+	data->r_play->plane_Y = 0;
 	data->r_play->plane_X = 0.66;
-	data->r_play->plane_Y = 0.0; 
-	data->mlx_ptr = mlx_init();
-	data->mlx_win = mlx_new_window(data->mlx_ptr, SCREEN_HEIGHT_SIZE * 2 , SCREEN_WIDHT_SIZE * 2, "CUBE 3D");
-	data->background_img->mlx_img = mlx_new_image(data->mlx_ptr, SCREEN_WIDHT_SIZE , SCREEN_HEIGHT_SIZE);
+	
 }
