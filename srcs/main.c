@@ -12,10 +12,17 @@
 
 #include "../includes/cub3D.h"
 
+typedef struct s_windows
+{
+	void *mlx_ptr;
+	void *win_ptr;
+} t_windows;
+
 int	main(int ac, char **av)
 {
-	t_map	map;
-
+	t_map		map;
+	t_windows 	window;
+	t_player	player;
 	if (ac != 2)
 		return (EXIT_FAILURE);
 	ft_bzero(&map, sizeof(t_map));
@@ -27,6 +34,14 @@ int	main(int ac, char **av)
 	printf("\nmap:\n---------------------\n");
 	print_2d_array_nl(map.map);
 	printf("\n---------------------\n");
+	printf("\n %c \n", map.player_direction);
+/******************************************************************************************************************************************** */	
+	window.mlx_ptr = mlx_init();
+    window.win_ptr = mlx_new_window(window.mlx_ptr, 640, 360, "Tutorial Window");
+	init_player_data(&player);
+    mlx_loop(window.mlx_ptr);
+	
+	(void)window.win_ptr;
 	free_and_exit(EXIT_SUCCESS, &map);
 	return (EXIT_SUCCESS);
 }

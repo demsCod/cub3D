@@ -12,12 +12,13 @@
 
 #ifndef STRUCT_H
 # define STRUCT_H
+# include "../srcs/raycasting/raycasting.h"
 
 typedef struct map_data
 {
 	int fd;
 	char **map;
-} t_map_data;
+}	t_map_data;
 
 typedef struct s_map
 {
@@ -31,10 +32,5 @@ typedef struct s_map
 	int		map_fd;
 	char	player_direction;
 }	t_map;
-
-typedef struct s_player
-{
-	char	initial_direction;
-}	t_player;
 
 #endif

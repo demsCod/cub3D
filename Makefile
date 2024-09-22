@@ -29,6 +29,7 @@ FILES = srcs/main.c	\
 		srcs/errors/print_errors.c	\
 		srcs/errors/error_utils.c	\
 		srcs/errors/free_and_exit.c	\
+		srcs/raycasting/init_player_data.c \
 
 INCLUDES = -I/usr/include -lmlx -lft -I./includes
 
