@@ -3,12 +3,17 @@
 
 void init_player_data(t_player *player)
 {
-    player->pos.x = 22;
-    player->pos.y = 12;
-    player->dir.x = -1;
-    player->dir.y = 0;
-    player->plane.x = 0.00;
-    player->plane.y = 0.66;    
-    
-    
+
+    player->x = 1;
+    player->y = 13;
+    player->dir_x = 1;
+    player->dir_y = -1;
+    player->plane_x = 0.00;
+    player->plane_y = 0.66;    
+    int i = -1;
+    while (++i < 4)
+    {
+        player->texture_buffer[i] = ft_calloc(1,sizeof(int));
+    }
 }
+

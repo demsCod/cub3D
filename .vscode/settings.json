@@ -16,6 +16,7 @@
 		"mlx.h": "c",
 		"sysmacros.h": "c",
 		"mlx_int.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"raycasting.h": "c"
 	}
 }

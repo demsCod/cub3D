@@ -13,6 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "struct.h"
 # include "includes.h"
 
 int		get_map(t_map *map, char *map_path);

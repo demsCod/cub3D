@@ -22,7 +22,11 @@ int	main(int ac, char **av)
 {
 	t_map		map;
 	t_windows 	window;
-	t_player	player;
+	t_player	*player;
+	t_all 		*all;
+
+	player = malloc(sizeof(t_player));
+	all = malloc(sizeof(t_all));
 	if (ac != 2)
 		return (EXIT_FAILURE);
 	ft_bzero(&map, sizeof(t_map));
@@ -35,13 +39,20 @@ int	main(int ac, char **av)
 	print_2d_array_nl(map.map);
 	printf("\n---------------------\n");
 	printf("\n %c \n", map.player_direction);
+	printf("%s\n", map.cei_texture);
 /******************************************************************************************************************************************** */	
+	all->map = &map;
+	print_2d_array_nl(all->map->map);
+
+	init_player_data(player);
+	all->player = player;
 	window.mlx_ptr = mlx_init();
-    window.win_ptr = mlx_new_window(window.mlx_ptr, 640, 360, "Tutorial Window");
-	init_player_data(&player);
+    window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT, WIN_HEIGHT, "Tutorial Window");
+	all->player->mlx_ptr = window.mlx_ptr;
+	all->player->win_ptr = window.win_ptr;
+	//game_loop(all);
+	mlx_loop_hook(window.mlx_ptr, game_loop, all);
     mlx_loop(window.mlx_ptr);
-	
-	(void)window.win_ptr;
 	free_and_exit(EXIT_SUCCESS, &map);
 	return (EXIT_SUCCESS);
 }

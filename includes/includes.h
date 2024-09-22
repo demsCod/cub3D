@@ -13,10 +13,11 @@
 #ifndef INCLUDES_H
 # define INCLUDES_H
 
+# include "struct.h"
 # include "../srcs/libft/libft.h"
 # include "../mlx/mlx.h"
 # include "../mlx/mlx_int.h"
-# include "struct.h"
+# include "../srcs/raycasting/raycasting.h"
 # include "../srcs/errors/error.h"
 
 # include <errno.h>
@@ -29,6 +30,8 @@
 
 # define KEYPRESS 2
 # define KEYRELEASE 3
+# define WIN_WIDHT 1080
+# define WIN_HEIGHT 1000
 
 # define WALL '1'
 # define GROUND '0'
