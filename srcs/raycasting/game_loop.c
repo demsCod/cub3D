@@ -6,5 +6,7 @@ int game_loop(t_all *all)
         return (1);
     casting_ray(all->player, all->map);
     ft_draw_pixel_map(all->player);
+
+   
     return(0);
 }

@@ -32,6 +32,13 @@ typedef struct s_map
 	char	**map;
 	int		map_fd;
 	char	player_direction;
+	int 	floor_hex;
+	int 	ceiling_hex;
+	char 	index;
+	int 	start_row;
+	int 	start_col;
+	int 	str_index;
+	int		offset;
 }	t_map;
 
 
@@ -134,8 +141,8 @@ typedef struct s_img_data
 }	t_img_data;
 
 
-
-#define TEXTURE_SIZE 128
+ 
+#define TEXTURE_SIZE 16
 
 
 #endif

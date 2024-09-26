@@ -20,7 +20,8 @@ void casting_ray(t_player *player, t_map *map)
         calcul_wall_distance(player);
         calcul_wall_height(player);
         set_pixel_map(player, x);
-        // printf("wall dist==%f\n", player->wall_dist);
+        // printf("wall dist==%f\n", player->wall_dist); ft_draw_pixel_map(all->player);
+
         x++;
     }   
 }
