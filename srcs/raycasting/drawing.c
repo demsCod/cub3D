@@ -19,7 +19,7 @@ static t_cardinal_direction	ft_get_cardinal_direction(t_player *ray)
 	}
 }
 
-void set_pixel_map(t_player *player, int x)
+void set_pixel_map(t_player *player, t_map *map, int x)
 {
 
     t_cardinal_direction dir;
@@ -35,12 +35,13 @@ void set_pixel_map(t_player *player, int x)
         tex_x = TEXTURE_SIZE - tex_x - 1;
     step = 1.0 * TEXTURE_SIZE / player->line_height;
     pos = (player->draw_start - WIN_HEIGHT / 2 + player->line_height / 2) * step;
+	printf("dweererftefrtfrt\n\n");
     while (player->draw_start < player->draw_end)
     {
         pos += step;
-        color = (player->texture_buffer)[dir][TEXTURE_SIZE * ((int)pos & (TEXTURE_SIZE - 1)) + tex_x];
-        if (dir == NORTH || dir == SOUTH)
-            color = (color >> 1) & 0x7F7F7F;
+        color = (map->texture_buffer)[dir][TEXTURE_SIZE * ((int)pos & (TEXTURE_SIZE - 1)) + tex_x];
+        // if (dir == NORTH || dir == SOUTH)
+        //     color = (color >> 1) & 0x7F7F7F;
             // add some shading to the north and south walls
         if (color > 0)
             player->pixel_map[player->draw_start][x] = color;

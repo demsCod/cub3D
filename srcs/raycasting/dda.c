@@ -1,4 +1,5 @@
 # include "raycasting.h"
+# include <math.h>
 
 void calcul_step(t_player *player)
 {

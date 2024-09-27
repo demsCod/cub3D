@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:55:38 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 19:49:44 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/27 17:09:40 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+#define TEXTURE_SIZE 64
+# define NUM_TEXTURES 4
 typedef enum e_cardinal_direction
 {
 	NORTH = 0,
@@ -29,6 +31,8 @@ typedef struct s_map
 	char	*EA_texture;
 	char	*flo_texture;
 	char	*cei_texture;
+	char 	*path_texture[4];
+	int 	*texture_buffer[NUM_TEXTURES];
 	char	**map;
 	int		map_fd;
 	char	player_direction;
@@ -80,7 +84,6 @@ typedef struct s_wall_data
 	int		draw_end;
 }	t_wall_data;
 
-# define NUM_TEXTURES 4
 
 typedef struct s_data
 {
@@ -113,7 +116,7 @@ typedef struct s_player
 	int		draw_start;
 	int		draw_end;
 	double	wall_x;
-	int 	*texture_buffer[NUM_TEXTURES];
+
 	t_data	data;
 	int		**pixel_map;
 	void	*mlx_ptr;
@@ -142,7 +145,6 @@ typedef struct s_img_data
 
 
  
-#define TEXTURE_SIZE 16
 
 
 #endif

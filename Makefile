@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra -g3
+FLAGS = -Wall -Werror -Wextra -g3 
 
 MlX_FLAGS = -Lmlx -Imlx -lmlx -framework OpenGL -framework AppKit
 
@@ -49,7 +49,7 @@ LIBMLX = libmx_linux.a
 all : $(LIBMLX)  $(LIBFT) $(NAME)
 
 $(NAME) : $(OBJ)
-		@$(CC) $(FLAGS)  $(OBJ) $(INCLUDES) -L $(LIBFTPATH) -lft -L ./mlx -lmlx -lXext -lX11 -o $(NAME)
+		@$(CC) $(FLAGS)  $(OBJ) $(INCLUDES) -L $(LIBFTPATH) -lft -L ./mlx -lmlx -lXext -lX11 -lm -o $(NAME)
 		@echo "$(GREEN)$(NAME) done ✅$(END)"
 
 $(LIBMLX) :

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 21:03:44 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/27 17:52:14 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,53 @@ typedef struct s_windows
 	void *mlx_ptr;
 	void *win_ptr;
 } t_windows;
+
+bool	create_texture_from_img(t_img_data *img, t_map *map, t_cardinal_direction dir)
+{
+	int	*pixels;
+	int	i;
+	int	j;
+
+	pixels = ft_calloc(sizeof(int), img->width * img->height);
+	if (!pixels)
+		return (false);
+	i = -1;
+	while (++i < img->height)
+	{
+		j = -1;
+		while (++j < img->width)
+			pixels[i * img->width + j] = img->addr[i * img->width + j];
+	}
+	map->texture_buffer[dir] = pixels;
+	return (true);
+}
+
+
+void init_texture_buffer(t_map *map, t_player *player, t_windows *win)
+{
+	t_img_data	tmp;
+	int		i;
+
+	(void)player;
+	map->path_texture[0] = map->NO_texture;
+	map->path_texture[1] = map->SO_texture;
+	map->path_texture[2] = map->WE_texture;
+	map->path_texture[3] = map->EA_texture;
+	i = -1;
+	print_2d_array_nl(map->path_texture);
+	while (++i < 4)
+	{
+		tmp.img = mlx_xpm_file_to_image(win->mlx_ptr,
+				map->path_texture[i], &tmp.width, &tmp.height);
+		if (!tmp.img)
+			exit(i);
+		tmp.addr = (int *)mlx_get_data_addr(tmp.img,
+				&tmp.bpp, &tmp.line_len, &tmp.endian);
+		create_texture_from_img(&tmp, map, i);
+		mlx_destroy_image(win->mlx_ptr, tmp.img);
+	}
+}
+
 
 int	main(int ac, char **av)
 {
@@ -34,20 +81,15 @@ int	main(int ac, char **av)
 	ft_bzero(&map, sizeof(t_map));
 	if (get_map(&map, av[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	printf("infos:\n---------------------\nNO: [%s]\nSO: [%s]\nWE: [%s]\nEA: [%s]\nF: [%s]\nC: [%s]\n---------------------\n",
-		map.NO_texture, map.SO_texture, map.WE_texture, map.EA_texture,
-		map.flo_texture, map.cei_texture);
-	printf("\nmap:\n---------------------\n");
-	print_2d_array_nl(map.map);
-	printf("\n---------------------\n");
-	printf("\n %c \n", map.player_direction);
-	printf("%s\n", map.cei_texture);
 /******************************************************************************************************************************************** */	
-	all->map = &map;
+	//print_2d_array(map.map);
 	init_player_data(player);
+	all->map = &map;
+	//print_2d_array(all->map->map);
 	all->player = player;
 	window.mlx_ptr = mlx_init();
     window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT, WIN_HEIGHT, "Tutorial Window");
+	init_texture_buffer(&map, player, &window);
 	all->player->mlx_ptr = window.mlx_ptr;
 	all->player->win_ptr = window.win_ptr;
 	game_loop(all);
@@ -57,3 +99,5 @@ int	main(int ac, char **av)
 	free_and_exit(EXIT_SUCCESS, &map);
 	return (EXIT_SUCCESS);
 }
+
+
