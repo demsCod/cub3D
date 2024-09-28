@@ -92,11 +92,11 @@ int	main(int ac, char **av)
 	init_texture_buffer(&map, player, &window);
 	all->player->mlx_ptr = window.mlx_ptr;
 	all->player->win_ptr = window.win_ptr;
-	game_loop(all);
+	//game_loop(all);
+	mlx_hook(window.win_ptr,  02, (1L << 0), keyfonction, all->player);
 	mlx_loop_hook(window.mlx_ptr, game_loop, all);
-	// mlx_hook(window.mlx_ptr,  02, (1L << 0), keyfonction, all->player);
     mlx_loop(window.mlx_ptr);
-	free_and_exit(EXIT_SUCCESS, &map);
+	//free_and_exit(EXIT_SUCCESS, &map);
 	return (EXIT_SUCCESS);
 }
 

@@ -15,7 +15,7 @@ int move_right(t_player *r)
 
 	prev_dx = r->dir_x;
 	prev_px = r->plane_x;
-	rot_speed = 0.4;
+	rot_speed = -0.045;
 	r->dir_x = r->dir_x * cos(rot_speed) - r->dir_y * sin(rot_speed);
 	r->dir_y = prev_dx * sin(rot_speed) + r->dir_y * cos(rot_speed);
 	r->plane_x = r->plane_x * cos(rot_speed) - r->plane_y * sin(rot_speed);
@@ -30,7 +30,7 @@ int move_left(t_player *r)
 
 	prev_dx = r->dir_x;
 	prev_px = r->plane_x;
-	rot_speed = -0.4;
+	rot_speed = 0.045;
 	r->dir_x = r->dir_x * cos(rot_speed) - r->dir_y * sin(rot_speed);
 	r->dir_y = prev_dx * sin(rot_speed) + r->dir_y * cos(rot_speed);
 	r->plane_x = r->plane_x * cos(rot_speed) - r->plane_y * sin(rot_speed);
@@ -42,7 +42,7 @@ int	move_up(t_player *r)
 {
 	double		move_speed;
 
-	move_speed = 3;
+	move_speed = 0.45;
 	r->x += r->dir_x * move_speed;
 	r->y += r->dir_y * move_speed;
 	return(0);
@@ -52,7 +52,7 @@ int	move_down(t_player *r)
 {
 	double		move_speed;
 
-	move_speed = 3;
+	move_speed = 0.45;
 	r->x -= r->dir_x * move_speed;
 	r->y -= r->dir_y * move_speed;
 	return(0);

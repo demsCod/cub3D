@@ -23,4 +23,5 @@ void casting_ray(t_player *player, t_map *map)
         // printf("wall dist==%f\n", player->wall_dist); ft_draw_pixel_map(all->player);
         x++;
     }   
+        ft_draw_pixel_map(player);
 }

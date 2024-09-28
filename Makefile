@@ -49,7 +49,7 @@ LIBMLX = libmx_linux.a
 all : $(LIBMLX)  $(LIBFT) $(NAME)
 
 $(NAME) : $(OBJ)
-		@$(CC) $(FLAGS)  $(OBJ) $(INCLUDES) -L $(LIBFTPATH) -lft -L ./mlx -lmlx -lXext -lX11 -lm -o $(NAME)
+		@$(CC) $(FLAGS)  $(OBJ) $(INCLUDES) -L $(LIBFTPATH) -lft -L ./mlx -lmlx -lXext -lX11 -lm -no-pie -o $(NAME)
 		@echo "$(GREEN)$(NAME) done ✅$(END)"
 
 $(LIBMLX) :
