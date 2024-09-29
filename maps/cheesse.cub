@@ -4,7 +4,7 @@ WE ./texture/holey-cheese-256x256.xpm
 EA ./texture/holey-cheese-256x256.xpm
 
 F 220,100,0
-C 225,0,0
+C 225,25,0
 
  111111111111111111
 10000000000000000001
