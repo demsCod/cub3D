@@ -60,7 +60,6 @@ void	ft_draw_pixel_map(t_player *player, t_map *m)
 	img.addr = (int *)mlx_get_data_addr(img.img, &img.bpp,
 			&img.line_len, &img.endian);
 	y = -1;
-	printf("cei =%d   flo = %d\n", m->cei_texture, m->flo_texture);
 	while (++y < WIN_HEIGHT)
 	{
 		x = -1;

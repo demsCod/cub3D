@@ -67,8 +67,8 @@ void calcul_wall_height (t_player *player)
 	if (player->draw_end >= WIN_HEIGHT)
 		player->draw_end = WIN_HEIGHT - 1;
 	if (player->side == 0)
-		player->wall_x = player->y + player->wall_dist * player->dir_y;
+		player->wall_x = player->y + player->wall_dist * player->ray_dir_y;
 	else
-		player->wall_x = player->x + player->wall_dist * player->dir_x;
+		player->wall_x = player->x + player->wall_dist * player->ray_dir_x;
 	player->wall_x -= floor(player->wall_x);
 }

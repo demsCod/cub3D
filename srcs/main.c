@@ -94,7 +94,7 @@ int	main(int ac, char **av)
 	all->player->mlx_ptr = window.mlx_ptr;
 	all->player->win_ptr = window.win_ptr;
 	game_loop(all);
-	mlx_hook(window.win_ptr,  02, (1L << 0), keyfonction, all->player);
+	mlx_hook(window.win_ptr,  02, (1L << 0), keyfonction, all);
 	mlx_loop_hook(window.mlx_ptr, game_loop, all);
     mlx_loop(window.mlx_ptr);
 	return (EXIT_SUCCESS);

@@ -1,10 +1,21 @@
 #include "../../includes/includes.h"
 
-    double	ft_min(double a, double b)
+double	ft_min(double a, double b)
 {
 	if (a < b)
 		return (a);
 	return (b);
+}
+
+int is_wall(t_map *map, double x, double y)
+{
+    int map_x = (int)x;
+    int map_y = (int)y;
+    
+    if (map_x < 0 || map_y < 0 || map_x >= WIN_WIDHT || map_y >= WIN_HEIGHT)
+        return 1; // Consider out of bounds as a wall
+    
+    return (map->map[map_y][map_x] == '1');
 }
 
 int move_right(t_player *r)
@@ -38,46 +49,51 @@ int move_left(t_player *r)
 	return (0);
 }
 
-int	move_up(t_player *r)
+int	move_up(t_player *r, t_map *map)
 {
-	double		move_speed;
-
-	move_speed = 0.45;
-	r->x += r->dir_x * move_speed;
-	r->y += r->dir_y * move_speed;
-	return(0);
+	double move_speed = 0.45;
+    double new_x = r->x + r->dir_x * move_speed;
+    double new_y = r->y + r->dir_y * move_speed;
+    
+    // Check for collision
+    if (!is_wall(map, new_x, r->y))
+        r->x = new_x;
+    if (!is_wall(map, r->x, new_y))
+        r->y = new_y;
+    
+    return 0;
 }
 
-int	move_down(t_player *r)
+int	move_down(t_player *r, t_map *map )
 {
-	double		move_speed;
-
-	move_speed = 0.45;
-	r->x -= r->dir_x * move_speed;
-	r->y -= r->dir_y * move_speed;
-	return(0);
+	double move_speed = 0.45;
+    double new_x = r->x - r->dir_x * move_speed;
+    double new_y = r->y - r->dir_y * move_speed;
+    
+    // Check for collision
+    if (!is_wall(map, new_x, r->y))
+        r->x = new_x;
+    if (!is_wall(map, r->x, new_y))
+        r->y = new_y;
+    
+    return 0;
 }
-int	keyfonction(int keycode, t_player *data)
+int	keyfonction(int keycode, t_all *data)
 {
-	printf("press\n");
 	if (keycode == XK_Escape)
 		exit(0);
 
 	if (keycode == XK_Left)
-	{
-		move_left(data);
-	}
+		move_left(data->player);
+	
 	if (keycode == XK_Right)
-	{
-		move_right(data);
-	}
+		move_right(data->player);
+	
 	if (keycode == XK_Up)
-	{
-		move_up(data);
-	}
+		move_up(data->player, data->map);
+	
 	if (keycode == XK_Down)
-	{
-		move_down(data);
-	}
+		move_down(data->player, data->map);
+	
 	return (0);
 }
