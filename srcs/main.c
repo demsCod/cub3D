@@ -12,6 +12,8 @@
 
 #include "../includes/cub3D.h"
 
+
+void init_gun(t_all *all);
 // int	keyfonction(int keycode, t_map_data *data);
 
 typedef struct s_windows
@@ -93,6 +95,7 @@ int	main(int ac, char **av)
 	init_texture_buffer(&map, player, &window);
 	all->player->mlx_ptr = window.mlx_ptr;
 	all->player->win_ptr = window.win_ptr;
+	init_gun(all);
 	game_loop(all);
 	mlx_hook(window.win_ptr,  02, (1L << 0), keyfonction, all);
 	mlx_loop_hook(window.mlx_ptr, game_loop, all);

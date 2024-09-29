@@ -124,11 +124,23 @@ typedef struct s_player
 
 }	t_player;
 
+
+typedef struct s_gun {
+    void    *img;
+    char    *addr;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+    int     width;
+    int     height;
+} t_gun;
+
+
 typedef struct s_all
 {
 	t_map 		*map;
 	t_player	*player;
-
+	t_gun		*gun;
 }	t_all;
 
 typedef struct s_img_data

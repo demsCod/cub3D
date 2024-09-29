@@ -30,8 +30,8 @@
 
 # define KEYPRESS 2
 # define KEYRELEASE 3
-# define WIN_WIDHT 1080
-# define WIN_HEIGHT 1000
+# define WIN_WIDHT 1900
+# define WIN_HEIGHT 1080
 
 # define WALL '1'
 # define GROUND '0'
