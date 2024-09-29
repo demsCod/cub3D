@@ -19,7 +19,7 @@ static t_cardinal_direction	ft_get_cardinal_direction(t_player *ray)
 	}
 }
 
-#define GUN_WIDTH 1000
+#define GUN_WIDTH  1200
 #define GUN_HEIGHT 900
 
 void draw_gun(t_all *all)
@@ -31,7 +31,7 @@ void draw_gun(t_all *all)
 
 	x = screen_x;
 	y = screen_y;
-    for (y = screen_y - 200 ; y < GUN_HEIGHT; y++)
+    for (y = screen_y + 200  ; y < GUN_HEIGHT; y++)
     {
         for (x = 0; x < GUN_WIDTH; x++)
         {
@@ -41,8 +41,8 @@ void draw_gun(t_all *all)
 			// 	return ;
 			// }
             color = *(unsigned int*)(all->gun->addr + (y * all->gun->line_length + x * (all->gun->bits_per_pixel / 8)));
-            if (color != 0xFFFFFF) // Assuming black is transparent
-                all->player->pixel_map[y][ x] = color;
+            if (color != 0x00DF00 && color != 0x00FF0) // Assuming black is transparent
+                all->player->pixel_map[y + 70][x + 600] = color;
         }
     }
 }
@@ -82,7 +82,6 @@ void	ft_draw_pixel_map(t_player *player, t_map *m, t_all *all)
 	int		x;
 	int		y;
 
-	//(void)all;
     draw_gun(all);
 	img.img = mlx_new_image(player->mlx_ptr, WIN_WIDHT,  WIN_HEIGHT);
 	if (img.img == NULL)
