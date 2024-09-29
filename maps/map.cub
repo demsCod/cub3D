@@ -1,10 +1,10 @@
-NO ./texture/holey-cheese-64x64.xpm
-SO ./texture/holey-cheese-64x64.xpm
-WE ./texture/holey-cheese-64x64.xpm
-EA ./texture/holey-cheese-64x64.xpm
+NO ./texture/holey-cheese-256x256.xpm
+SO ./texture/holey-cheese-256x256.xpm
+WE ./texture/holey-cheese-256x256.xpm
+EA ./texture/holey-cheese-256x256.xpm
 
 F 220,100,0
-C 225,0,0
+C 225,30,0
 
 11111111111111111111111111111111111111111111111111111111111111111111111111
 10000000000000000000000000000000000000000000000000000000000000000000000001

@@ -6,11 +6,14 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 21:43:09 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/09/26 21:21:00 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+int parse_atou(char *str);
+int	color_to_struct(t_map *map, char *info, char type);
 
 int	info_to_map(char *info, t_map *map, char *type)
 {
@@ -25,9 +28,9 @@ int	info_to_map(char *info, t_map *map, char *type)
 	else if (ft_strcmp(type, "EA") == 0)
 		target = &map->EA_texture;
 	else if (ft_strcmp(type, "F") == 0)
-		target = &map->flo_texture;
+		return (color_to_struct(map, info, 'F'));
 	else if (ft_strcmp(type, "C") == 0)
-		target = &map->cei_texture;
+		return (color_to_struct(map, info, 'C'));
 	else
 		return (free(info), EXIT_FAILURE);
 	if (*target != NULL)
@@ -81,10 +84,56 @@ bool	need_more_info(t_map *map)
 		return (true);
 	else if (map->EA_texture == NULL)
 		return (true);
-	else if (map->flo_texture == NULL)
+	else if (map->flo_texture == -1)
 		return (true);
-	else if (map->cei_texture == NULL)
+	else if (map->cei_texture == -1)
 		return (true);
 	else
 		return (false);
+}
+
+int	color_to_struct(t_map *map, char *info, char type)
+{
+	char	**split;
+	int		tab[3];
+	
+	if (count_char(info, ',') != 2)
+		return (EXIT_FAILURE);
+	if ((type == 'C' && map->cei_texture != -1)
+		|| (type == 'F' && map->flo_texture != -1))
+		return (EXIT_FAILURE);
+	split = ft_split(info, ',');
+	if (split == NULL)
+		return (EXIT_FAILURE);
+	if (ft_strlen_2d(split) != 3)
+		return (free_2d_str(split), EXIT_FAILURE);
+	tab[0] = parse_atou(split[0]);
+	tab[1] = parse_atou(split[1]);
+	tab[2] = parse_atou(split[2]);
+	if (tab[0] == -1 || tab[2] == -1 || tab[2] == -1)
+		return (EXIT_FAILURE);
+	if (type == 'C')
+		map->cei_texture = tab[0] * pow(256, 2) + tab[1] * 265 + tab[2];
+	else if (type == 'F')
+		map->flo_texture = tab[0] * pow(256, 2) + tab[1] * 265 + tab[2];
+	return (free_2d_str(split), EXIT_SUCCESS);
+}
+
+int parse_atou(char *str)
+{
+	int	i;
+	int	number;
+
+	i = 0;
+	number = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		number = number * 10 + (str[i] - '0');
+		i++;
+		if (number > 255)
+			return (-1);
+	}
+	if (str[i] != '\0')
+		return (-1);
+	return (number);
 }

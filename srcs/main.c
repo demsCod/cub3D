@@ -79,24 +79,24 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (EXIT_FAILURE);
 	ft_bzero(&map, sizeof(t_map));
+	map.map_fd = -1;
+	map.cei_texture = -1;
+	map.flo_texture = -1;
 	if (get_map(&map, av[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 /******************************************************************************************************************************************** */	
-	//print_2d_array(map.map);
 	init_player_data(player);
 	all->map = &map;
-	//print_2d_array(all->map->map);
 	all->player = player;
 	window.mlx_ptr = mlx_init();
     window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT, WIN_HEIGHT, "Tutorial Window");
 	init_texture_buffer(&map, player, &window);
 	all->player->mlx_ptr = window.mlx_ptr;
 	all->player->win_ptr = window.win_ptr;
-	//game_loop(all);
+	game_loop(all);
 	mlx_hook(window.win_ptr,  02, (1L << 0), keyfonction, all->player);
 	mlx_loop_hook(window.mlx_ptr, game_loop, all);
     mlx_loop(window.mlx_ptr);
-	//free_and_exit(EXIT_SUCCESS, &map);
 	return (EXIT_SUCCESS);
 }
 

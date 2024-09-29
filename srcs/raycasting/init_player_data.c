@@ -4,7 +4,7 @@
 void init_player_data(t_player *player)
 {
 
-    player->x = 10;
+    player->x = 4;
     player->y = 2;
     player->dir_x = -1;
     player->dir_y = -0.0;

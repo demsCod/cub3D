@@ -48,7 +48,7 @@ void set_pixel_map(t_player *player, t_map *map, int x)
     }
 }
 
-void	ft_draw_pixel_map(t_player *player)
+void	ft_draw_pixel_map(t_player *player, t_map *m)
 {
 	t_img_data	img;
 	int		x;
@@ -60,6 +60,7 @@ void	ft_draw_pixel_map(t_player *player)
 	img.addr = (int *)mlx_get_data_addr(img.img, &img.bpp,
 			&img.line_len, &img.endian);
 	y = -1;
+	printf("cei =%d   flo = %d\n", m->cei_texture, m->flo_texture);
 	while (++y < WIN_HEIGHT)
 	{
 		x = -1;
@@ -68,9 +69,9 @@ void	ft_draw_pixel_map(t_player *player)
 			if (player->pixel_map[y][x] > 0)
 				img.addr[y * (img.line_len / 4) + x] = player->pixel_map[y][x];
 			else if (y < WIN_HEIGHT / 2)
-				img.addr[y * (img.line_len / 4) + x] = 0x000000; //map->cei_texture;
+				img.addr[y * (img.line_len / 4) + x] = m->cei_texture; //map->cei_texture;
 			else if (y < WIN_HEIGHT -1)
-				img.addr[y * (img.line_len / 4) + x] = 0xFFFFFF; //map->flo_texture;
+				img.addr[y * (img.line_len / 4) + x] = m->flo_texture; //map->flo_texture;
 		}
 	}
 	mlx_put_image_to_window(player->mlx_ptr, player->win_ptr, img.img, 0, 0);
