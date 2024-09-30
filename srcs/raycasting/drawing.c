@@ -19,30 +19,31 @@ static t_cardinal_direction	ft_get_cardinal_direction(t_player *ray)
 	}
 }
 
-#define GUN_WIDTH  1200
-#define GUN_HEIGHT 900
+#define GUN_WIDTH 1000
+#define GUN_HEIGHT 563
 
 void draw_gun(t_all *all)
 {
     int x, y;
     int color;
-    int screen_x = (WIN_WIDHT - GUN_WIDTH) ;
-    int screen_y = WIN_HEIGHT / 5;
+    int screen_x = (WIN_WIDHT - GUN_WIDTH) / 2;
+    int screen_y = WIN_HEIGHT - GUN_HEIGHT;
 
-	x = screen_x;
-	y = screen_y;
-    for (y = screen_y + 200  ; y < GUN_HEIGHT; y++)
+    for (y = 0; y < GUN_HEIGHT; y++)
     {
         for (x = 0; x < GUN_WIDTH; x++)
         {
-			// if ((x + screen_x) > WIN_WIDHT || (y + screen_y) > WIN_HEIGHT)
-			// {
-			// 	printf("finiiiiiiiiish\n");
-			// 	return ;
-			// }
-            color = *(unsigned int*)(all->gun->addr + (y * all->gun->line_length + x * (all->gun->bits_per_pixel / 8)));
-            if (color != 0x00DF00 && color != 0x00FF0) // Assuming black is transparent
-                all->player->pixel_map[y + 70][x + 600] = color;
+            if ((x + screen_x) < WIN_WIDHT && (y + screen_y) < WIN_HEIGHT)
+            {
+                color = *(unsigned int*)(all->gun->addr + (y * all->gun->line_length + x * (all->gun->bits_per_pixel / 8)));
+                // Remove green background (assuming 0x00FF00 is the green color)
+                if (color != 0x0013FF07 && color !=  0x0019FE0E && color != 0x001CFE13 && color != 0x001DF815 && color != 0x0024FB1A && color != 0x0044F43A)
+                {
+				    // printf("Problematic pixel at (%d, %d): 0x%08X\n", x, y, color);
+                    // exit(0);
+                    all->player->pixel_map[y + screen_y][x + screen_x] = color;
+                }
+            }
         }
     }
 }

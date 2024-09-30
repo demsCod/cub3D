@@ -5,7 +5,7 @@ void draw_gun(t_all *all);
 void init_gun(t_all *all)
 {
     all->gun = malloc(sizeof(t_gun));
-    all->gun->img = mlx_xpm_file_to_image(all->player->mlx_ptr, "texture/pistol.xpm", 
+    all->gun->img = mlx_xpm_file_to_image(all->player->mlx_ptr, "texture/gun_1.xpm", 
                                           &all->gun->width, &all->gun->height);
 	if(!all->gun->img)
 		exit(93);
