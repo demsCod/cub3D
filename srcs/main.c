@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/29 23:11:37 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:37:08 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 	int		i;
 
 	(void)player;
+	map->texture_buffer = malloc(sizeof(int ) * 4);
 	map->path_texture[0] = map->NO_texture;
 	map->path_texture[1] = map->SO_texture;
 	map->path_texture[2] = map->WE_texture;
@@ -92,7 +93,7 @@ int	main(int ac, char **av)
 	all->map = &map;
 	all->player = player;
 	window.mlx_ptr = mlx_init();
-    window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT, WIN_HEIGHT, "Tutorial Window");
+    window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT, WIN_HEIGHT, "CUB 3D");
 	init_texture_buffer(&map, player, &window);
 	all->player->mlx_ptr = window.mlx_ptr;
 	all->player->win_ptr = window.win_ptr;

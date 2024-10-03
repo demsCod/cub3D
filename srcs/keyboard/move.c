@@ -81,7 +81,9 @@ int	move_down(t_player *r, t_map *map )
 int	keyfonction(int keycode, t_all *data)
 {
 	if (keycode == XK_Escape)
-		exit(0);
+	{
+		free_all_exit(data);
+	}
 
 	if (keycode == XK_Left)
 		move_left(data->player);

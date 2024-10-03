@@ -52,6 +52,7 @@ void set_pixel_map(t_player *player, t_map *map, int x)
 {
     t_cardinal_direction dir;
     int tex_x;
+	int tex_y;
     int color = 0;
     double pos = 0;
     double step = 0;
@@ -64,7 +65,7 @@ void set_pixel_map(t_player *player, t_map *map, int x)
     pos = (player->draw_start - WIN_HEIGHT / 2 + player->line_height / 2) * step;
     while (player->draw_start < player->draw_end)
     {
-        int tex_y = (int)pos & (TEXTURE_SIZE - 1);
+        tex_y = (int)pos & (TEXTURE_SIZE - 1);
         pos += step;
         // Ensure we're not accessing out-of-bounds memory
         if ( tex_x >= 0 && tex_x < TEXTURE_SIZE  && tex_y >= 0 && tex_y < TEXTURE_SIZE )
@@ -92,7 +93,6 @@ void	ft_draw_pixel_map(t_player *player, t_map *m, t_all *all)
 	img.addr = (int *)mlx_get_data_addr(img.img, &img.bpp,
 			&img.line_len, &img.endian);
 	y = -1;
-    printf("floor rgb ==%d\n", m->flo_texture);
 	while (++y < WIN_HEIGHT)
 	{
 		x = -1;
@@ -102,11 +102,10 @@ void	ft_draw_pixel_map(t_player *player, t_map *m, t_all *all)
 				img.addr[y * (img.line_len / 4) + x] = player->pixel_map[y][x];
 			else if (y < WIN_HEIGHT / 2)
 				img.addr[y * (img.line_len / 4) + x] = m->cei_texture; //map->cei_texture;
-			else if (y < WIN_HEIGHT -1)
+			else if (y < WIN_HEIGHT)
 				img.addr[y * (img.line_len / 4) + x] = m->flo_texture; //map->flo_texture;
 		}
 	}
-
 	mlx_put_image_to_window(player->mlx_ptr, player->win_ptr, img.img, 0, 0);
 	mlx_destroy_image(player->mlx_ptr, img.img);
 }

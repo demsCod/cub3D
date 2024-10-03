@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:55:38 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/27 17:09:40 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:35:02 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_map
 	char	*WE_texture;
 	char	*EA_texture;
 	char 	*path_texture[4];
-	int 	*texture_buffer[NUM_TEXTURES];
+	int 	**texture_buffer;
 	int		flo_texture;
 	int		cei_texture;
 	char	**map;
