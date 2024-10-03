@@ -59,6 +59,7 @@ void init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 	{
 		tmp.img = mlx_xpm_file_to_image(win->mlx_ptr,
 				map->path_texture[i], &tmp.width, &tmp.height);
+		printf("%d | %d", tmp.width, tmp.height);
 		if (!tmp.img)
 			exit(i);
 		tmp.addr = (int *)mlx_get_data_addr(tmp.img,

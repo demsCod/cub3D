@@ -13,7 +13,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#define TEXTURE_SIZE 256
+#define TEXTURE_SIZE 124
 # define NUM_TEXTURES 4
 typedef enum e_cardinal_direction
 {

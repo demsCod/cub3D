@@ -50,12 +50,11 @@ void draw_gun(t_all *all)
 
 void set_pixel_map(t_player *player, t_map *map, int x)
 {
-
     t_cardinal_direction dir;
     int tex_x;
-    int color;
-    double pos;
-    double step;
+    int color = 0;
+    double pos = 0;
+    double step = 0;
 
     dir = ft_get_cardinal_direction(player);
     tex_x = (int)(player->wall_x * TEXTURE_SIZE);
@@ -65,16 +64,19 @@ void set_pixel_map(t_player *player, t_map *map, int x)
     pos = (player->draw_start - WIN_HEIGHT / 2 + player->line_height / 2) * step;
     while (player->draw_start < player->draw_end)
     {
+        int tex_y = (int)pos & (TEXTURE_SIZE - 1);
         pos += step;
-        color = (map->texture_buffer)[dir][TEXTURE_SIZE * ((int)pos & (TEXTURE_SIZE - 1)) + tex_x];
-        if (dir == NORTH || dir == SOUTH)
-            color = (color >> 1) & 0x7F7F7F;
-            // add some shading to the north and south walls
-        if (color > 0)
-            player->pixel_map[player->draw_start][x] = color;
-            // your pixel map (int** in this case)
+        // Ensure we're not accessing out-of-bounds memory
+        if ( tex_x >= 0 && tex_x < TEXTURE_SIZE  && tex_y >= 0 && tex_y < TEXTURE_SIZE )
+        {
+            color = (map->texture_buffer)[dir][TEXTURE_SIZE * tex_y + tex_x];
+            if (dir == NORTH || dir == SOUTH)
+                color = (color >> 1) & 0x7F7F7F;
+            if (color > 0 && player->draw_start >= 0 && player->draw_start < WIN_HEIGHT && x >= 0 && x < WIN_WIDHT)
+                player->pixel_map[player->draw_start][x] = color;
+        }
         player->draw_start++;
-    }	
+    }   
 }
 
 void	ft_draw_pixel_map(t_player *player, t_map *m, t_all *all)
@@ -86,10 +88,11 @@ void	ft_draw_pixel_map(t_player *player, t_map *m, t_all *all)
     draw_gun(all);
 	img.img = mlx_new_image(player->mlx_ptr, WIN_WIDHT,  WIN_HEIGHT);
 	if (img.img == NULL)
-		return ;
+		exit(0);
 	img.addr = (int *)mlx_get_data_addr(img.img, &img.bpp,
 			&img.line_len, &img.endian);
 	y = -1;
+    printf("floor rgb ==%d\n", m->flo_texture);
 	while (++y < WIN_HEIGHT)
 	{
 		x = -1;

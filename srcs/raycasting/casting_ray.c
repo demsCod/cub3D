@@ -11,7 +11,7 @@ void casting_ray(t_player *player, t_map *map)
     int x;
 
     x = 0;
-    while (x < WIN_WIDHT)
+    while (x < WIN_WIDHT - 1)
     {
         player->camera_x = 2 * x / (double)WIN_WIDHT - 1;
         player->ray_dir_x = player->dir_x + player->plane_x * player->camera_x;
