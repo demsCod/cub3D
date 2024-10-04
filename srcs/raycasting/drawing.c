@@ -86,6 +86,7 @@ void	ft_draw_pixel_map(t_player *player, t_map *m, t_all *all)
 	int		x;
 	int		y;
 
+    // (void)all;
     draw_gun(all);
 	img.img = mlx_new_image(player->mlx_ptr, WIN_WIDHT,  WIN_HEIGHT);
 	if (img.img == NULL)

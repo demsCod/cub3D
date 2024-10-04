@@ -14,12 +14,14 @@ void init_gun(t_all *all)
 }
 void free_2d_tab_int(int **tab, int index)
 {
+	int i = 0;
 	while (index > 0)
 	{
-		free(tab[index]);
+		free(tab[i]);
 		--index;
+		i++;
 	}
-	free(tab);
+	//free(tab);
 }
 
 

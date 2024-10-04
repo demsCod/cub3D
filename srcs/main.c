@@ -39,6 +39,7 @@ bool	create_texture_from_img(t_img_data *img, t_map *map, t_cardinal_direction d
 			pixels[i * img->width + j] = img->addr[i * img->width + j];
 	}
 	map->texture_buffer[dir] = pixels;
+	printf("dir ==%d\n", dir);
 	return (true);
 }
 
@@ -49,18 +50,16 @@ void init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 	int		i;
 
 	(void)player;
-	map->texture_buffer = malloc(sizeof(int ) * 4);
-	map->path_texture[0] = map->NO_texture;
-	map->path_texture[1] = map->SO_texture;
-	map->path_texture[2] = map->WE_texture;
-	map->path_texture[3] = map->EA_texture;
+	//map->texture_buffer = malloc(sizeof(int ) * 5);
+	map->path_texture[0] = ft_strdup (map->NO_texture);
+	map->path_texture[1] = ft_strdup (map->SO_texture);
+	map->path_texture[2] = ft_strdup (map->NO_texture);
+	map->path_texture[3] = ft_strdup (map->NO_texture);
 	i = -1;
-	print_2d_array_nl(map->path_texture);
 	while (++i < 4)
 	{
 		tmp.img = mlx_xpm_file_to_image(win->mlx_ptr,
 				map->path_texture[i], &tmp.width, &tmp.height);
-		printf("%d | %d", tmp.width, tmp.height);
 		if (!tmp.img)
 			exit(i);
 		tmp.addr = (int *)mlx_get_data_addr(tmp.img,

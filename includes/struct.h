@@ -15,6 +15,9 @@
 
 #define TEXTURE_SIZE 124
 # define NUM_TEXTURES 4
+
+# define WIN_WIDHT 1900
+# define WIN_HEIGHT 1080
 typedef enum e_cardinal_direction
 {
 	NORTH = 0,
@@ -30,7 +33,7 @@ typedef struct s_map
 	char	*WE_texture;
 	char	*EA_texture;
 	char 	*path_texture[4];
-	int 	**texture_buffer;
+	int 	*texture_buffer[4];
 	int		flo_texture;
 	int		cei_texture;
 	char	**map;
@@ -118,7 +121,7 @@ typedef struct s_player
 	double	wall_x;
 
 	t_data	data;
-	int		**pixel_map;
+	int		*pixel_map[WIN_HEIGHT + 1];
 	void	*mlx_ptr;
 	void	*win_ptr;
 
