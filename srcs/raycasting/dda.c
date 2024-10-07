@@ -42,10 +42,7 @@ void dda(t_player *player, char **map)
 			player->side = 1;
         }
         if (map[player->map_y][player->map_x] == '1')
-        {
-            // printf("x==%d | y==%d\n", player->map_x, player->map_y);
             break;
-        }
     }
 }
 

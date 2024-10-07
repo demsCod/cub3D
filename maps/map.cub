@@ -1,6 +1,6 @@
 NO ./texture/wall_1.xpm
 SO ./texture/wall_1.xpm
-WE ./texture/wall_1.xpm
+WE ./texture/door.xpm
 EA ./texture/wall_1.xpm
 
 F 0,0,0
