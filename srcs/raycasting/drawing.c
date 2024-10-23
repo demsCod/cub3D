@@ -58,7 +58,7 @@ void set_pixel_map(t_player *player, t_map *map, int x)
     double step = 0;
 
     dir = ft_get_cardinal_direction(player);
-    if (x % 100 == 0)  // Affiche les infos tous les 100 pixels
+    if (x % 1000 == 0)  // Affiche les infos tous les 100 pixels
     {
         printf("\n=== Debug Info for pixel %d ===\n", x);
         printf("side: %d\n", player->side);
