@@ -14,7 +14,6 @@
 
 
 void init_gun(t_all *all);
-// int	keyfonction(int keycode, t_map_data *data);
 
 typedef struct s_windows
 {
@@ -39,7 +38,6 @@ bool	create_texture_from_img(t_img_data *img, t_map *map, t_cardinal_direction d
 			pixels[i * img->width + j] = img->addr[i * img->width + j];
 	}
 	map->texture_buffer[dir] = pixels;
-	printf("dir ==%d\n", dir);
 	return (true);
 }
 

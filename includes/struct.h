@@ -20,10 +20,10 @@
 # define WIN_HEIGHT 1080
 typedef enum e_cardinal_direction
 {
-	NORTH = 0,
-	SOUTH = 1,
-	WEST = 2,
-	EAST = 3
+	NORTH = 1,
+	SOUTH = 0,
+	WEST = 3,
+	EAST = 2
 }	t_cardinal_direction;
 
 typedef struct s_map

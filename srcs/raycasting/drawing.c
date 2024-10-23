@@ -1,22 +1,22 @@
 #include "raycasting.h"
 
 
-static t_cardinal_direction	ft_get_cardinal_direction(t_player *ray)
+static t_cardinal_direction ft_get_cardinal_direction(t_player *ray)
 {
-	if (ray->side == 0)
-	{
-		if (ray->dir_x < 0)
-			return (WEST);
-		else
-			return (EAST);
-	}
-	else
-	{
-		if (ray->dir_x > 0)
-			return (SOUTH);
-		else
-			return (NORTH);
-	}
+    if (ray->side == 0)  // Collision sur un mur vertical (axe X)
+    {
+        // Si on touche le côté d'un mur (côté Est ou Ouest)
+        if (ray->step_x > 0)  // ⚠️ Utilisation de step_x au lieu de ray_dir_x
+            return (WEST);
+        return (EAST);
+    }
+    else  // Collision sur un mur horizontal (axe Y)
+    {
+        // Si on touche le haut ou le bas d'un mur (Nord ou Sud)
+        if (ray->step_y > 0)  // ⚠️ Utilisation de step_y au lieu de ray_dir_y
+            return (SOUTH);
+        return (NORTH);
+    }
 }
 
 #define GUN_WIDTH 1000
@@ -58,8 +58,18 @@ void set_pixel_map(t_player *player, t_map *map, int x)
     double step = 0;
 
     dir = ft_get_cardinal_direction(player);
-    tex_x = (int)(player->wall_x * TEXTURE_SIZE);
-    if ((player->side == 0 && player->ray_dir_x < 0) || (player->side == 1 && player->ray_dir_y > 0))
+    if (x % 100 == 0)  // Affiche les infos tous les 100 pixels
+    {
+        printf("\n=== Debug Info for pixel %d ===\n", x);
+        printf("side: %d\n", player->side);
+        printf("ray_dir: (x=%f, y=%f)\n", player->ray_dir_x, player->ray_dir_y);
+        printf("Direction choisie: %d\n", dir);
+        printf("wall_x: %f\n", player->wall_x);
+    }
+    tex_x = (int)(player->wall_x * (TEXTURE_SIZE));
+    if (player->side == 0 && player->ray_dir_x > 0)
+        tex_x = TEXTURE_SIZE - tex_x - 1;
+    if (player->side == 1 && player->ray_dir_y < 0)
         tex_x = TEXTURE_SIZE - tex_x - 1;
     step = 1.0 * TEXTURE_SIZE / player->line_height;
     pos = (player->draw_start - WIN_HEIGHT / 2 + player->line_height / 2) * step;
