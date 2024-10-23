@@ -6,14 +6,14 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:55:38 by ibaby             #+#    #+#             */
-/*   Updated: 2024/10/03 20:35:02 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:22:04 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#define TEXTURE_SIZE 124
+#define TEXTURE_SIZE 128
 # define NUM_TEXTURES 4
 
 # define WIN_WIDHT 1900

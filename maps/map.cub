@@ -1,7 +1,7 @@
-NO ./texture/wall_1.xpm
-SO ./texture/wall_1.xpm
-WE ./texture/door.xpm
-EA ./texture/wall_1.xpm
+NO ./texture/brickwall1_64.xpm
+SO ./texture/floortiless.xpm
+WE ./texture/templewall01.xpm
+EA ./texture/stonewall1_64_1_.xpm
 
 F 0,0,0
 C 0,0,0
