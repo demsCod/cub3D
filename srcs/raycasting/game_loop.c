@@ -21,7 +21,6 @@ void free_2d_tab_int(int **tab, int index)
 		--index;
 		i++;
 	}
-	//free(tab);
 }
 
 
