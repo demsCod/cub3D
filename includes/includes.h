@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:32:32 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 19:46:31 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/10/25 15:34:44 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INCLUDES_H
 # define INCLUDES_H
 
-# include "struct.h"
-# include "../srcs/libft/libft.h"
 # include "../mlx/mlx.h"
 # include "../mlx/mlx_int.h"
-# include "../srcs/raycasting/raycasting.h"
 # include "../srcs/errors/error.h"
-
+# include "../srcs/libft/libft.h"
+# include "../srcs/raycasting/raycasting.h"
+# include "struct.h"
 # include <errno.h>
-# include <stdbool.h>
 # include <fcntl.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
 # include <math.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+# define M_PI 3.14159265358979323846
 
 # define KEYPRESS 2
 # define KEYRELEASE 3
-
 
 # define WALL '1'
 # define GROUND '0'
