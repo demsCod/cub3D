@@ -46,6 +46,8 @@ int	move_right(t_player *r)
 	r->dir_y = old_dir_x * sin(-rot_speed) + r->dir_y * cos(-rot_speed);
 	r->plane_x = r->plane_x * cos(-rot_speed) - r->plane_y * sin(-rot_speed);
 	r->plane_y = old_plane_x * sin(-rot_speed) + r->plane_y * cos(-rot_speed);
+    r->plane_x = -r->dir_y * 0.66;
+    r->plane_y = r->dir_x * 0.66;
 	return (0);
 }
 
@@ -66,6 +68,8 @@ int	move_left(t_player *r)
 	// Rotate camera plane consistently with direction
 	r->plane_x = r->plane_x * cos(rot_speed) - r->plane_y * sin(rot_speed);
 	r->plane_y = old_plane_x * sin(rot_speed) + r->plane_y * cos(rot_speed);
+    r->plane_x = -r->dir_y * 0.66;
+    r->plane_y = r->dir_x * 0.66;
 	return (0);
 }
 int	move_up(t_player *r, t_map *map)
@@ -77,6 +81,10 @@ int	move_up(t_player *r, t_map *map)
 
 	delta_time = get_delta_time();
 	move_speed = MOVE_SPEED * delta_time;
+
+    printf("Position avant mouvement: x=%f, y=%f\n", r->x, r->y);
+    printf("Direction: dir_x=%f, dir_y=%f\n", r->dir_x, r->dir_y);
+    printf("Plan camera: plane_x=%f, plane_y=%f\n", r->plane_x, r->plane_y);
 	// Move exactly in the direction we're facing
 	move_x = r->dir_x * move_speed;
 	move_y = r->dir_y * move_speed;
@@ -85,6 +93,7 @@ int	move_up(t_player *r, t_map *map)
 		r->x += move_x;
 	if (!is_wall(map, r->x, r->y + move_y))
 		r->y += move_y;
+    printf("Position après mouvement: x=%f, y=%f\n\n", r->x, r->y);
 	return (0);
 }
 
