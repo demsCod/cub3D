@@ -17,5 +17,8 @@
 # include "includes.h"
 
 int		get_map(t_map *map, char *map_path);
+int	init_game_data(t_all *all, t_map *map);
+void open_windows(t_all *all, t_map *map);
+
 
 #endif

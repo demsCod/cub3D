@@ -16,56 +16,6 @@
 # define TEXTURE_SIZE 128
 # define NUM_TEXTURES 4
 
-# define WIN_WIDHT 1900
-# define WIN_HEIGHT 1080
-typedef enum e_cardinal_direction
-{
-	NORTH = 1,
-	SOUTH = 0,
-	WEST = 3,
-	EAST = 2
-}				t_cardinal_direction;
-
-typedef struct s_map
-{
-	char		*NO_texture;
-	char		*SO_texture;
-	char		*WE_texture;
-	char		*EA_texture;
-	char		*path_texture[4];
-	int			*texture_buffer[4];
-	int			flo_texture;
-	int			cei_texture;
-	char		**map;
-	int			map_fd;
-	char		player_direction;
-	int			floor_hex;
-	int			ceiling_hex;
-	char		index;
-	int			start_row;
-	int			start_col;
-	int			str_index;
-	int			offset;
-}				t_map;
-
-// Before starting, ensure that you have installed both the mlx
-// and glfw libraries
-// To successfully run your file,
-ensure that you have included the 'mlx' library.
-	// When compiling the code, you must include the necessary frameworks
-	// and link the glfw library, as well as the libmlx.a.
-	// The flag (-O3 -ffast-math) is used for optimization.
-	// The flag (-framework) is used to specify the required frameworks.
-	// the flag (-lglfw) is for linking the glfw library
-	// the flag (-L) is for the path to the glfw library
-	// the flag (-o) is for the name of the executable file
-	// to run the program (./cub)
-
-	// example:
-	// cc -O3 -ffast-math -framework Cocoa -framework OpenGL -framework IOKit
-	- lglfw(path to libmlx42.a) - L(path to glfw library) cub3d.c - o cub
-
-# include "MLX/MLX42.h" // include the mlx library
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -78,12 +28,13 @@ ensure that you have included the 'mlx' library.
 # define ROTATION_SPEED 0.045 // rotation speed
 # define PLAYER_SPEED 4 // player speed
 
-	typedef enum e_cardinal_direction {
-		NORTH = 1,
-		SOUTH = 0,
-		WEST = 3,
-		EAST = 2
-	} t_cardinal_direction;
+typedef enum e_cardinal_direction
+{
+	NORTH = 1,
+	SOUTH = 0,
+	WEST = 3,
+	EAST = 2
+}				t_cardinal_direction;
 
 typedef struct s_map
 {
@@ -131,8 +82,8 @@ typedef struct s_ray //the ray structure
 
 typedef struct s_mlx //the mlx structure
 {
-	mlx_image_t *img; // the image
-	mlx_t *mlx_p;     // the mlx pointer
+	void  *mlx_p;     // the mlx pointer
+	void  *win_p;
 	t_ray *ray;       // the ray structure
 	t_map *dt;       // the data structure
 	t_player *ply;    // the player structure

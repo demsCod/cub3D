@@ -28,14 +28,10 @@ FILES = srcs/main.c	\
 		srcs/parsing/infos_utils.c	\
 		srcs/errors/print_errors.c	\
 		srcs/errors/error_utils.c	\
-		srcs/errors/free_and_exit.c	\
-		srcs/raycasting/init_player_data.c \
-		srcs/raycasting/casting_ray.c \
-		srcs/raycasting/game_loop.c \
-		srcs/raycasting/dda.c \
-		srcs/raycasting/drawing.c \
-		srcs/raycasting/pixel.c \
-		srcs/keyboard/move.c 
+		srcs/init/init_player_data.c \
+		srcs/keyboard/move.c  \
+		srcs/init/init_game.c \
+		srcs/windows/windows_main.c
 
 INCLUDES = -I/usr/include -lmlx -lft -I./includes
 

@@ -5,7 +5,7 @@
 # include "../../includes/includes.h"
 # include "../../includes/struct.h"
 
-void	init_player_data(t_player *player);
+int	init_player_data(t_all *mlx);
 void	calcul_step(t_player *player);
 void	dda(t_player *player, char **map);
 void	casting_ray(t_player *player, t_map *map);

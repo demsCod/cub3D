@@ -15,6 +15,9 @@
 
 # include "../../includes/cub3D.h"
 
+# include <stdbool.h>
+
+
 void	print_err(char *err, bool erno);
 char	*replace_newline(char *str);
 void	double_err(char *err1, char *err2, bool erno);

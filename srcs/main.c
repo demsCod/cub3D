@@ -27,9 +27,8 @@ int	main(int ac, char **av)
 	map.flo_texture = -1;
 	if (get_map(&map, av[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (init_game_data(&all) == EXIT_FAILURE)
+	if (init_game_data(&all, &map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-
 	return (EXIT_SUCCESS);
 }
 
