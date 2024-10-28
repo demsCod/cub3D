@@ -33,6 +33,7 @@ int	init_game_data(t_all *all, t_map *map)
 	all = ft_calloc(1, sizeof(t_all));
 	all->dt = map;
 	all->ply =  malloc(sizeof(t_player));
+	all->ray =  malloc(sizeof(t_ray));
 	if (set_map(all, map->map) == 1)
 		return (EXIT_FAILURE);
 	if (init_player_data(all) == 1)

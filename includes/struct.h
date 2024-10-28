@@ -60,6 +60,7 @@ typedef struct s_map
 	int			start_col;
 	int			str_index;
 	int			offset;
+	int 		*pixel_map[S_H];
 }				t_map;
 
 typedef struct s_player //the player structure

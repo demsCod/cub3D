@@ -31,7 +31,9 @@ FILES = srcs/main.c	\
 		srcs/init/init_player_data.c \
 		srcs/keyboard/move.c  \
 		srcs/init/init_game.c \
-		srcs/windows/windows_main.c
+		srcs/windows/windows_main.c \
+		srcs/raycasting/game_loop.c \
+		srcs/raycasting/pixel.c
 
 INCLUDES = -I/usr/include -lmlx -lft -I./includes
 
