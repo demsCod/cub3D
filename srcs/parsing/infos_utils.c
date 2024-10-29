@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infos_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/26 21:21:00 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/10/25 17:37:09 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	color_to_struct(t_map *map, char *info, char type);
 int	info_to_map(char *info, t_map *map, char *type)
 {
 	char	**target;
+	int		status;
 
 	if (ft_strcmp(type, "NO") == 0)
 		target = &map->NO_texture;
@@ -28,9 +29,9 @@ int	info_to_map(char *info, t_map *map, char *type)
 	else if (ft_strcmp(type, "EA") == 0)
 		target = &map->EA_texture;
 	else if (ft_strcmp(type, "F") == 0)
-		return (color_to_struct(map, info, 'F'));
+		return (status = color_to_struct(map, info, 'F'), free(info), status);
 	else if (ft_strcmp(type, "C") == 0)
-		return (color_to_struct(map, info, 'C'));
+		return (status = color_to_struct(map, info, 'C'), free(info), status);
 	else
 		return (free(info), EXIT_FAILURE);
 	if (*target != NULL)
@@ -40,8 +41,7 @@ int	info_to_map(char *info, t_map *map, char *type)
 		info = ft_re_strtrim(info, " ");
 	if (info == NULL)
 		return (print_err("info_to_map: strtrim failed", false), EXIT_FAILURE);
-	*target = info;
-	return (EXIT_SUCCESS);
+	return (*target = info, EXIT_SUCCESS);
 }
 
 char	*get_info(char *line)

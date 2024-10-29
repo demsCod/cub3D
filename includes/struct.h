@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:55:38 by ibaby             #+#    #+#             */
-/*   Updated: 2024/10/23 19:22:04 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:24:45 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_map
 	int 	start_col;
 	int 	str_index;
 	int		offset;
+	char	*to_free;
 }	t_map;
 
 

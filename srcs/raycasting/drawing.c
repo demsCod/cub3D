@@ -58,14 +58,14 @@ void set_pixel_map(t_player *player, t_map *map, int x)
     double step = 0;
 
     dir = ft_get_cardinal_direction(player);
-    if (x % 1000 == 0)  // Affiche les infos tous les 100 pixels
-    {
-        printf("\n=== Debug Info for pixel %d ===\n", x);
-        printf("side: %d\n", player->side);
-        printf("ray_dir: (x=%f, y=%f)\n", player->ray_dir_x, player->ray_dir_y);
-        printf("Direction choisie: %d\n", dir);
-        printf("wall_x: %f\n", player->wall_x);
-    }
+    // if (x % 1000 == 0)  // Affiche les infos tous les 100 pixels
+    // {
+    //     printf("\n=== Debug Info for pixel %d ===\n", x);
+    //     printf("side: %d\n", player->side);
+    //     printf("ray_dir: (x=%f, y=%f)\n", player->ray_dir_x, player->ray_dir_y);
+    //     printf("Direction choisie: %d\n", dir);
+    //     printf("wall_x: %f\n", player->wall_x);
+    // }
     tex_x = (int)(player->wall_x * (TEXTURE_SIZE));
     if (player->side == 0 && player->ray_dir_x > 0)
         tex_x = TEXTURE_SIZE - tex_x - 1;

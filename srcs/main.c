@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/10/23 19:18:30 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:37:48 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ int	main(int ac, char **av)
 	t_player	*player;
 	t_all 		*all;
 
-	player = malloc(sizeof(t_player));
-	all = malloc(sizeof(t_all));
 	if (ac != 2)
 		return (EXIT_FAILURE);
+	player = malloc(sizeof(t_player));
+	all = malloc(sizeof(t_all));
 	ft_bzero(&map, sizeof(t_map));
 	map.map_fd = -1;
 	map.cei_texture = -1;
