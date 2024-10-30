@@ -7,7 +7,7 @@
 
 
 
-void    init_player_data(t_player *player);
+void    init_player_data(t_player *player, char **map);
 void    calcul_step(t_player *player);
 void    dda(t_player *player, char **map);
 void    casting_ray(t_player *player, t_map *map);

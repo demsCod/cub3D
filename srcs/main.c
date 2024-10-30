@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/10/25 17:37:48 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/10/30 20:23:02 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int ac, char **av)
 	map.flo_texture = -1;
 	if (get_map(&map, av[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	init_player_data(player);
+	init_player_data(player, map.map);
 	all->map = &map;
 	all->player = player;
 	window.mlx_ptr = mlx_init();
