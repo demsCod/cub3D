@@ -1,6 +1,39 @@
 
 #include "raycasting.h"
 
+void define_lateral_margin(char **map, t_player *player, int x, int y)
+{
+	if (map[y][x - 1] && map[y][x - 1] == '1' && map[y][x + 1] && map[y][x + 1] == '1')
+	{
+		player->x += WALL_MARGIN / 2;
+		return;
+	}
+	if (map[y][x + 1] && map[y][x + 1] == '1')
+			player->x -= WALL_MARGIN;
+	else if (map[y][x - 1] && map[y][x - 1] == '1')
+			player->x += WALL_MARGIN;
+}
+
+void define_vertical_margin(char **map, t_player *player, int x, int y)
+{
+	if (map[y - 1][x] && map[y - 1][x] == '1' && map[y + 1][x] && map[y + 1][x] == '1')
+	{
+		player->y += WALL_MARGIN / 2;
+		return;
+	}
+	if (map[y + 1][x] && map[y + 1][x] == '1')
+			player->y -= WALL_MARGIN;
+	else if (map[y - 1][x] && map[y - 1][x] == '1')
+			player->y += WALL_MARGIN;
+}
+
+void define_pos(char **map, t_player *player, int x, int y)
+{
+	player->x = x;
+	player->y = y;
+	define_lateral_margin(map, player, x, y);
+	define_vertical_margin(map, player, x, y);
+}
 void	player_pos(char **map, t_player *player)
 {
 	int	x;
@@ -15,12 +48,7 @@ void	player_pos(char **map, t_player *player)
 			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'W')
 			{
 				player->initial_direction = map[y][x];
-				player->x = x;
-				if (map[y][x - 1] && map[y][x - 1] == '1')
-					player->x += WALL_MARGIN;
-				if (map[y][x + 1] && map[y][x + 1] == '1')
-					player->x -= WALL_MARGIN;
-				player->y = y;
+				define_pos(map, player, x, y);
 				return ;
 			}
 			x++;

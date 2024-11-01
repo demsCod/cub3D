@@ -1,7 +1,7 @@
 #ifndef RAYCASTING_H
 # define RAYCASTING_H
 
-#define WALL_MARGIN 1.0
+#define WALL_MARGIN 0.2
 
 #include "../../includes/includes.h"
 # include "../../includes/struct.h"

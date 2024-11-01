@@ -48,7 +48,6 @@ void init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 	int		i;
 
 	(void)player;
-	//map->texture_buffer = malloc(sizeof(int ) * 5);
 	map->path_texture[0] = ft_strdup (map->NO_texture);
 	map->path_texture[1] = ft_strdup (map->SO_texture);
 	map->path_texture[2] = ft_strdup (map->EA_texture);
@@ -60,7 +59,6 @@ void init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 				map->path_texture[i], &tmp.width, &tmp.height);
 		if (!tmp.img)
 			exit(i);
-		printf("%d | %d\n", tmp.height, tmp.width);
 		tmp.addr = (int *)mlx_get_data_addr(tmp.img,
 				&tmp.bpp, &tmp.line_len, &tmp.endian);
 		create_texture_from_img(&tmp, map, i);
@@ -94,7 +92,6 @@ int	main(int ac, char **av)
 	init_texture_buffer(&map, player, &window);
 	all->player->mlx_ptr = window.mlx_ptr;
 	all->player->win_ptr = window.win_ptr;
-	init_gun(all);
 	game_loop(all);
 	mlx_hook(window.win_ptr,  02, (1L << 0), ft_key_function, all);
 	mlx_loop_hook(window.mlx_ptr, game_loop, all);

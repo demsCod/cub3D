@@ -13,11 +13,11 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#define TEXTURE_SIZE 128
+#define TEXTURE_SIZE 64
 # define NUM_TEXTURES 4
 
 # define WIN_WIDHT 1900
-# define WIN_HEIGHT 1080
+# define WIN_HEIGHT 1080 
 typedef enum e_cardinal_direction
 {
 	NORTH = 1,

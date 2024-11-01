@@ -36,13 +36,8 @@ void draw_gun(t_all *all)
             if ((x + screen_x) < WIN_WIDHT && (y + screen_y) < WIN_HEIGHT)
             {
                 color = *(unsigned int*)(all->gun->addr + (y * all->gun->line_length + x * (all->gun->bits_per_pixel / 8)));
-                // Remove green background (assuming 0x00FF00 is the green color)
                 if (color != 0x0013FF07 && color !=  0x0019FE0E && color != 0x001CFE13 && color != 0x001DF815 && color != 0x0024FB1A && color != 0x0044F43A)
-                {
-				    // printf("Problematic pixel at (%d, %d): 0x%08X\n", x, y, color);
-                    // exit(0);
                     all->player->pixel_map[y + screen_y][x + screen_x] = color;
-                }
             }
         }
     }
@@ -58,14 +53,6 @@ void set_pixel_map(t_player *player, t_map *map, int x)
     double step = 0;
 
     dir = ft_get_cardinal_direction(player);
-    // if (x % 1000 == 0)  // Affiche les infos tous les 100 pixels
-    // {
-    //     printf("\n=== Debug Info for pixel %d ===\n", x);
-    //     printf("side: %d\n", player->side);
-    //     printf("ray_dir: (x=%f, y=%f)\n", player->ray_dir_x, player->ray_dir_y);
-    //     printf("Direction choisie: %d\n", dir);
-    //     printf("wall_x: %f\n", player->wall_x);
-    // }
     tex_x = (int)(player->wall_x * (TEXTURE_SIZE));
     if (player->side == 0 && player->ray_dir_x > 0)
         tex_x = TEXTURE_SIZE - tex_x - 1;
@@ -77,7 +64,6 @@ void set_pixel_map(t_player *player, t_map *map, int x)
     {
         tex_y = (int)pos & (TEXTURE_SIZE - 1);
         pos += step;
-        // Ensure we're not accessing out-of-bounds memory
         if ( tex_x >= 0 && tex_x < TEXTURE_SIZE  && tex_y >= 0 && tex_y < TEXTURE_SIZE )
         {
             color = (map->texture_buffer)[dir][TEXTURE_SIZE * tex_y + tex_x];
@@ -97,7 +83,6 @@ void	ft_draw_pixel_map(t_player *player, t_map *m, t_all *all)
 	int		y;
 
     (void)all;
-    //draw_gun(all);
 	img.img = mlx_new_image(player->mlx_ptr, WIN_WIDHT,  WIN_HEIGHT);
 	if (img.img == NULL)
 		exit(0);
@@ -112,9 +97,9 @@ void	ft_draw_pixel_map(t_player *player, t_map *m, t_all *all)
 			if (player->pixel_map[y][x] > 0)
 				img.addr[y * (img.line_len / 4) + x] = player->pixel_map[y][x];
 			else if (y < WIN_HEIGHT / 2)
-				img.addr[y * (img.line_len / 4) + x] = m->cei_texture; //map->cei_texture;
+				img.addr[y * (img.line_len / 4) + x] = m->cei_texture;
 			else if (y < WIN_HEIGHT)
-				img.addr[y * (img.line_len / 4) + x] = m->flo_texture; //map->flo_texture;
+				img.addr[y * (img.line_len / 4) + x] = m->flo_texture; 
 		}
 	}
 	mlx_put_image_to_window(player->mlx_ptr, player->win_ptr, img.img, 0, 0);

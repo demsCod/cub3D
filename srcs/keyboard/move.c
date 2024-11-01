@@ -156,7 +156,7 @@ int	ft_strafe_right(t_player *r, t_map *map)
 
 int	ft_key_function(int keycode, t_all *data)
 {
-	if (keycode == XK_Escape)
+	if (keycode == XK_Escape || keycode == DestroyNotify)
 		free_all_exit(data);
 	if (keycode == XK_Left)
 		ft_move_left(data->player);

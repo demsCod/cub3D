@@ -73,7 +73,6 @@ int	get_map(t_map *map, char *map_path)
 		return (ft_free(file), EXIT_FAILURE);
 	if (get_file_infos(file, map) == EXIT_FAILURE)
 		return (free_2d_str(file), EXIT_FAILURE);
-	print_2d_array_nl(map->map);
 	return (free_2d_str(file), EXIT_SUCCESS);
 }
 

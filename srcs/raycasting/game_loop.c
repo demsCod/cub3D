@@ -2,16 +2,7 @@
 
 void draw_gun(t_all *all);
 
-void init_gun(t_all *all)
-{
-    all->gun = malloc(sizeof(t_gun));
-    all->gun->img = mlx_xpm_file_to_image(all->player->mlx_ptr, "texture/gun_1.xpm", 
-                                          &all->gun->width, &all->gun->height);
-	if(!all->gun->img)
-		exit(93);
-    all->gun->addr = mlx_get_data_addr(all->gun->img, &all->gun->bits_per_pixel, 
-                                       &all->gun->line_length, &all->gun->endian);
-}
+
 void free_2d_tab_int(int **tab, int index)
 {
 	int i = 0;

@@ -32,5 +32,5 @@ void	free_all_exit(t_all *all)
 	free(all->player->mlx_ptr);
 	free_2d_tab_int(all->map->texture_buffer, 3);
 	free_and_exit(1, all->map);
-	exit(93);
+	exit(0);
 }
