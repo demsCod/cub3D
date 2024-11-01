@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infos_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/10/25 17:37:09 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:11:02 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ int	color_to_struct(t_map *map, char *info, char type)
 	if (tab[0] == -1 || tab[2] == -1 || tab[2] == -1)
 		return (EXIT_FAILURE);
 	if (type == 'C')
-		map->cei_texture = tab[0] * pow(256, 2) + tab[1] * 265 + tab[2];
+		map->cei_texture = tab[0] * pow(256, 2) + tab[1] * 256 + tab[2];
 	else if (type == 'F')
-		map->flo_texture = tab[0] * pow(256, 2) + tab[1] * 265 + tab[2];
+		map->flo_texture = tab[0] * pow(256, 2) + tab[1] * 256 + tab[2];
 	return (free_2d_str(split), EXIT_SUCCESS);
 }
 

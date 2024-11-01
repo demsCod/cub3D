@@ -1,10 +1,10 @@
 NO ./texture/brickwall1_64.xpm
-SO ./texture/floortiless.xpm
+SO ./texture/floortiles.xpm
 WE ./texture/templewall01.xpm
 EA ./texture/stonewall1_64_1_.xpm
 
-F 0,0,0
-C 0,0,0
+C 225,25,0
+F 220,100,0
 
 11111111111111111111111111111111
 10000000000000000000000000000001

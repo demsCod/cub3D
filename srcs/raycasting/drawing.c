@@ -84,7 +84,7 @@ void set_pixel_map(t_player *player, t_map *map, int x)
             if (dir == NORTH || dir == SOUTH)
                 color = (color >> 1) & 0x7F7F7F;
             if (color > 0 && player->draw_start >= 0 && player->draw_start < WIN_HEIGHT && x >= 0 && x < WIN_WIDHT)
-                player->pixel_map[player->draw_start][x] = color;
+            	player->pixel_map[player->draw_start][x] = color;
         }
         player->draw_start++;
     }   
