@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/02 16:17:34 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/02 17:27:10 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-
-int quit(t_all *all)
+int	quit(t_all *all)
 {
 	free_all_exit(all);
 	return (0);
@@ -21,11 +20,11 @@ int quit(t_all *all)
 
 typedef struct s_windows
 {
-	void *mlx_ptr;
-	void *win_ptr;
-} t_windows;
+	void	*mlx_ptr;
+	void	*win_ptr;
+}	t_windows;
 
-bool	create_texture_from_img(t_img_data *img, t_map *map, t_cardinal_direction dir)
+bool	create_text(t_img_data *img, t_map *map, t_cardinal_direction dir)
 {
 	int	*pixels;
 	int	i;
@@ -45,11 +44,10 @@ bool	create_texture_from_img(t_img_data *img, t_map *map, t_cardinal_direction d
 	return (true);
 }
 
-
-void init_texture_buffer(t_map *map, t_player *player, t_windows *win)
+void	init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 {
 	t_img_data	tmp;
-	int		i;
+	int			i;
 
 	(void)player;
 	map->path_texture[0] = ft_strdup (map->NO_texture);
@@ -65,18 +63,17 @@ void init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 			exit(i);
 		tmp.addr = (int *)mlx_get_data_addr(tmp.img,
 				&tmp.bpp, &tmp.line_len, &tmp.endian);
-		create_texture_from_img(&tmp, map, i);
+		create_text(&tmp, map, i);
 		mlx_destroy_image(win->mlx_ptr, tmp.img);
 	}
 }
 
-
 int	main(int ac, char **av)
 {
 	t_map		map;
-	t_windows 	window;
+	t_windows	window;
 	t_player	*player;
-	t_all 		*all;
+	t_all		*all;
 
 	if (ac != 2)
 		return (EXIT_FAILURE);
@@ -92,12 +89,14 @@ int	main(int ac, char **av)
 	all->map = &map;
 	all->player = player;
 	window.mlx_ptr = mlx_init();
-    window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT, WIN_HEIGHT, "CUB 3D");
+    window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT,
+			WIN_HEIGHT, "CUB 3D");
 	init_texture_buffer(&map, player, &window);
 	all->player->mlx_ptr = window.mlx_ptr;
 	all->player->win_ptr = window.win_ptr;
 	game_loop(all);
-	mlx_hook(window.win_ptr,  02, (1L << 0), ft_key_function, all);
+	mlx_hook(window.win_ptr,  02, (1L << 0),
+			ft_key_function, all);
 	mlx_hook(window.win_ptr, 17, (0L), *quit, all);
 	mlx_loop_hook(window.mlx_ptr, game_loop, all);
     mlx_loop(window.mlx_ptr);

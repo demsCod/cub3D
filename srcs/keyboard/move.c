@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 16:18:49 by mdembele          #+#    #+#             */
-/*   Updated: 2024/11/02 16:58:23 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/02 17:22:20 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 #include <time.h>
-
 
 int	ft_move_up(t_player *r, t_map *map)
 {

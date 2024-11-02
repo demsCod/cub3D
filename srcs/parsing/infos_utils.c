@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infos_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/02 17:13:39 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/02 17:21:45 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ char	*get_info(char *line)
 	info = ft_strdup(&line[i]);
 	if (info == NULL)
 		return (NULL);
-	i = ft_strlen(info);
-	if (info[i - 1] == '\n')
-		info[i - 1] = '\0';
+	if (info[ft_strlen(info) - 1] == '\n')
+		info[ft_strlen(info) - 1] = '\0';
 	i = -1;
 	while (info[++i])
 	{
