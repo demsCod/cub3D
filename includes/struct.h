@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:55:38 by ibaby             #+#    #+#             */
-/*   Updated: 2024/10/25 17:24:45 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/02 17:27:40 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@
 # define NUM_TEXTURES 4
 
 # define WIN_WIDHT 1900
-# define WIN_HEIGHT 1080 
+# define WIN_HEIGHT 1080
+
+typedef struct s_windows
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+}	t_windows;
+
 typedef enum e_cardinal_direction
 {
 	NORTH = 1,

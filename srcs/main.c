@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/02 17:27:10 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/02 17:27:31 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ int	quit(t_all *all)
 	free_all_exit(all);
 	return (0);
 }
-
-typedef struct s_windows
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-}	t_windows;
 
 bool	create_text(t_img_data *img, t_map *map, t_cardinal_direction dir)
 {
