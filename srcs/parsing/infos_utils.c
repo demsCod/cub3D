@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   infos_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/01 17:11:02 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/02 17:13:39 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int parse_atou(char *str);
-int	color_to_struct(t_map *map, char *info, char type);
+int		parse_atou(char *str);
+int		color_to_struct(t_map *map, char *info, char type);
 
 int	info_to_map(char *info, t_map *map, char *type)
 {
@@ -54,7 +54,7 @@ char	*get_info(char *line)
 		return (double_err("unrecognized info: ", line, false), NULL);
 	while (line[i] != ' ' && line[i] != '\t' && line[i] != '\0')
 		++i;
-	while (line[i] == ' ' || line[i] =='\t')
+	while (line[i] == ' ' || line[i] == '\t')
 		++i;
 	if (line[i] == '\0' || line[i] == '\n')
 		return (double_err("unrecognized info: ", line, false), NULL);
@@ -96,11 +96,11 @@ int	color_to_struct(t_map *map, char *info, char type)
 {
 	char	**split;
 	int		tab[3];
-	
+
 	if (count_char(info, ',') != 2)
 		return (EXIT_FAILURE);
-	if ((type == 'C' && map->cei_texture != -1)
-		|| (type == 'F' && map->flo_texture != -1))
+	if ((type == 'C' && map->cei_texture != -1) || (type == 'F'
+			&& map->flo_texture != -1))
 		return (EXIT_FAILURE);
 	split = ft_split(info, ',');
 	if (split == NULL)
@@ -119,7 +119,7 @@ int	color_to_struct(t_map *map, char *info, char type)
 	return (free_2d_str(split), EXIT_SUCCESS);
 }
 
-int parse_atou(char *str)
+int	parse_atou(char *str)
 {
 	int	i;
 	int	number;

@@ -6,14 +6,18 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/10/30 20:23:02 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:17:34 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
 
-void init_gun(t_all *all);
+int quit(t_all *all)
+{
+	free_all_exit(all);
+	return (0);
+}
 
 typedef struct s_windows
 {
@@ -94,6 +98,7 @@ int	main(int ac, char **av)
 	all->player->win_ptr = window.win_ptr;
 	game_loop(all);
 	mlx_hook(window.win_ptr,  02, (1L << 0), ft_key_function, all);
+	mlx_hook(window.win_ptr, 17, (0L), *quit, all);
 	mlx_loop_hook(window.mlx_ptr, game_loop, all);
     mlx_loop(window.mlx_ptr);
 	return (EXIT_SUCCESS);

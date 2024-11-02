@@ -35,6 +35,8 @@ FILES = srcs/main.c	\
 		srcs/raycasting/dda.c \
 		srcs/raycasting/drawing.c \
 		srcs/raycasting/pixel.c \
+		srcs/keyboard/move_utils.c \
+		srcs/keyboard/move_utils2.c \
 		srcs/keyboard/move.c 
 
 INCLUDES = -I/usr/include -lmlx -lft -I./includes

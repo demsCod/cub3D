@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/26 20:15:24 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/02 17:10:26 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	open_map(char *map_path)
 	last_dot = ft_strrchr(map_path, '.');
 	if (last_dot == NULL)
 		return (double_err(map_path, ": invalid map format",
-			false), -1);
+				false), -1);
 	if (ft_strcmp(last_dot, ".cub") != 0)
 		return (double_err(map_path, ": invalid map format", false), -1);
 	fd = open(map_path, O_RDONLY);
@@ -39,11 +39,6 @@ int	check_if_closed(char **map, int j, int i)
 		return (EXIT_FAILURE);
 	if (map[j - 1][i] == ' ' || map[j + 1][i] == ' ')
 		return (EXIT_FAILURE);
-	// - check des diagonales
-	// if (map[j - 1][i - 1] == ' ' || map[j - 1][i + 1] == ' ')
-	// 	return (EXIT_FAILURE);
-	// if (map[j + 1][i - 1] == ' ' || map[j + 1][i + 1] == ' ')
-	// 	return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
