@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infos_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/02 17:21:45 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/02 18:27:48 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	info_to_map(char *info, t_map *map, char *type)
 	int		status;
 
 	if (ft_strcmp(type, "NO") == 0)
-		target = &map->NO_texture;
+		target = &map->no_texture;
 	else if (ft_strcmp(type, "SO") == 0)
-		target = &map->SO_texture;
+		target = &map->so_texture;
 	else if (ft_strcmp(type, "WE") == 0)
-		target = &map->WE_texture;
+		target = &map->we_texture;
 	else if (ft_strcmp(type, "EA") == 0)
-		target = &map->EA_texture;
+		target = &map->ea_texture;
 	else if (ft_strcmp(type, "F") == 0)
 		return (status = color_to_struct(map, info, 'F'), free(info), status);
 	else if (ft_strcmp(type, "C") == 0)
@@ -75,13 +75,13 @@ char	*get_info(char *line)
 
 bool	need_more_info(t_map *map)
 {
-	if (map->NO_texture == NULL)
+	if (map->no_texture == NULL)
 		return (true);
-	else if (map->SO_texture == NULL)
+	else if (map->so_texture == NULL)
 		return (true);
-	else if (map->WE_texture == NULL)
+	else if (map->we_texture == NULL)
 		return (true);
-	else if (map->EA_texture == NULL)
+	else if (map->ea_texture == NULL)
 		return (true);
 	else if (map->flo_texture == -1)
 		return (true);
@@ -98,8 +98,8 @@ int	color_to_struct(t_map *map, char *info, char type)
 
 	if (count_char(info, ',') != 2)
 		return (EXIT_FAILURE);
-	if ((type == 'C' && map->cei_texture != -1) || (type == 'F'
-			&& map->flo_texture != -1))
+	if ((type == 'C' && map->cei_texture != -1)
+		|| (type == 'F' && map->flo_texture != -1))
 		return (EXIT_FAILURE);
 	split = ft_split(info, ',');
 	if (split == NULL)

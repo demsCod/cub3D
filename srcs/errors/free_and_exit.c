@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 21:00:40 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/02 16:24:24 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/02 18:17:16 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	free_2d_tab_int(int **tab, int index);
 
 void	free_and_exit(int status, t_map *map)
 {
-	ft_free(map->NO_texture);
-	ft_free(map->SO_texture);
-	ft_free(map->EA_texture);
-	ft_free(map->WE_texture);
+	ft_free(map->no_texture);
+	ft_free(map->so_texture);
+	ft_free(map->ea_texture);
+	ft_free(map->we_texture);
 	if (map->map_fd != 0 && map->map_fd != 1 && map->map_fd != 2
 		&& map->map_fd != -1)
 		close(map->map_fd);

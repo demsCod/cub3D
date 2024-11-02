@@ -6,13 +6,16 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:58:30 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/02 16:23:28 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/02 18:23:07 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
+# include "../../includes/struct.h"
+
 # include "../../includes/cub3D.h"
+# include <stdbool.h>
 
 void	print_err(char *err, bool erno);
 char	*replace_newline(char *str);

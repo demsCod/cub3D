@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/02 17:27:31 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/02 18:26:25 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 	int			i;
 
 	(void)player;
-	map->path_texture[0] = ft_strdup (map->NO_texture);
-	map->path_texture[1] = ft_strdup (map->SO_texture);
-	map->path_texture[2] = ft_strdup (map->EA_texture);
-	map->path_texture[3] = ft_strdup (map->WE_texture);
+	map->path_texture[0] = ft_strdup(map->no_texture);
+	map->path_texture[1] = ft_strdup(map->so_texture);
+	map->path_texture[2] = ft_strdup(map->ea_texture);
+	map->path_texture[3] = ft_strdup(map->we_texture);
 	i = -1;
 	while (++i < 4)
 	{
@@ -62,39 +62,47 @@ void	init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 	}
 }
 
-int	main(int ac, char **av)
+int	start_game(t_map *map)
 {
-	t_map		map;
 	t_windows	window;
 	t_player	*player;
 	t_all		*all;
 
-	if (ac != 2)
-		return (EXIT_FAILURE);
 	player = malloc(sizeof(t_player));
 	all = malloc(sizeof(t_all));
+	if (!player || !all)
+		return (EXIT_FAILURE);
+	init_player_data(player, map->map);
+	all->map = map;
+	all->player = player;
+	window.mlx_ptr = mlx_init();
+	if (!window.win_ptr)
+		return (EXIT_FAILURE);
+	window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT, WIN_HEIGHT,
+			"CUB 3D");
+	init_texture_buffer(map, player, &window);
+	all->player->mlx_ptr = window.mlx_ptr;
+	all->player->win_ptr = window.win_ptr;
+	game_loop(all);
+	mlx_hook(window.win_ptr, 02, (1L << 0), ft_key_function, all);
+	mlx_hook(window.win_ptr, 17, (0L), *quit, all);
+	mlx_loop_hook(window.mlx_ptr, game_loop, all);
+	mlx_loop(window.mlx_ptr);
+	return (EXIT_SUCCESS);
+}
+
+int	main(int ac, char **av)
+{
+	t_map	map;
+
+	if (ac != 2)
+		return (EXIT_FAILURE);
 	ft_bzero(&map, sizeof(t_map));
 	map.map_fd = -1;
 	map.cei_texture = -1;
 	map.flo_texture = -1;
 	if (get_map(&map, av[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	init_player_data(player, map.map);
-	all->map = &map;
-	all->player = player;
-	window.mlx_ptr = mlx_init();
-    window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT,
-			WIN_HEIGHT, "CUB 3D");
-	init_texture_buffer(&map, player, &window);
-	all->player->mlx_ptr = window.mlx_ptr;
-	all->player->win_ptr = window.win_ptr;
-	game_loop(all);
-	mlx_hook(window.win_ptr,  02, (1L << 0),
-			ft_key_function, all);
-	mlx_hook(window.win_ptr, 17, (0L), *quit, all);
-	mlx_loop_hook(window.mlx_ptr, game_loop, all);
-    mlx_loop(window.mlx_ptr);
+	start_game(&map);
 	return (EXIT_SUCCESS);
 }
-
-
