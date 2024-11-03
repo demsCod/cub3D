@@ -26,7 +26,7 @@ int	parse_map(char **map, t_map *map_data)
 		while (map[j][++i] != '\0')
 		{
 			if (map[j][i] == '0')
-			{	
+			{
 				if (check_if_closed(map, j, i) == EXIT_FAILURE)
 				{
 					print_err("map is not closed", false);

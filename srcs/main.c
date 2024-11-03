@@ -76,10 +76,10 @@ int	start_game(t_map *map)
 	all->map = map;
 	all->player = player;
 	window.mlx_ptr = mlx_init();
-	if (!window.win_ptr)
-		return (EXIT_FAILURE);
 	window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT, WIN_HEIGHT,
 			"CUB 3D");
+	if (!window.win_ptr)
+		return (EXIT_FAILURE);
 	init_texture_buffer(map, player, &window);
 	all->player->mlx_ptr = window.mlx_ptr;
 	all->player->win_ptr = window.win_ptr;

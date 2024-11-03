@@ -98,6 +98,16 @@ typedef struct s_data
 	int			*texture_buffer[NUM_TEXTURES];
 }				t_data;
 
+typedef struct t_pixel
+{
+	t_cardinal_direction	dir;
+	int						tex_x;
+	int						tex_y;
+	int						color;
+	double					pos;
+	double					step;
+}	t_pixel;
+
 typedef struct s_player
 {
 	char		initial_direction;

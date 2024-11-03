@@ -27,15 +27,6 @@ static t_cardinal_direction	ft_get_cardinal_direction(t_player *ray)
 		return (NORTH);
 	}
 }
-typedef struct t_pixel
-{
-	t_cardinal_direction	dir;
-	int						tex_x;
-	int						tex_y;
-	int						color;
-	double					pos;
-	double					step;
-}	t_pixel;
 
 void	init_pix(t_pixel *pix, t_player *player)
 {
