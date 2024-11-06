@@ -6,11 +6,12 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:38:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/06 12:44:37 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/06 13:44:52 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include <unistd.h>
 
 int	parse_map(char **map, t_map *map_data)
 {
@@ -59,7 +60,7 @@ int	get_file_infos(char **file, t_map *map)
 			++i;
 	}
 	if (file[i] == NULL)
-		return (EXIT_FAILURE);
+		return (ft_putendl_fd("Error\nno map", 2), EXIT_FAILURE);
 	map->map = strdup2d(&file[i]);
 	if (map->map == NULL || parse_map(map->map, map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
@@ -75,7 +76,8 @@ int	get_map(t_map *map, char *map_path)
 		return (EXIT_FAILURE);
 	file = str2d_file(map->map_fd);
 	if (file == NULL || file[0] == NULL)
-		return (ft_free(file), EXIT_FAILURE);
+		return (ft_putendl_fd("Error\nfailed to read file", STDERR_FILENO),
+			ft_free(file), EXIT_FAILURE);
 	if (get_file_infos(file, map) == EXIT_FAILURE)
 		return (free_2d_str(file), EXIT_FAILURE);
 	return (free_2d_str(file), EXIT_SUCCESS);
@@ -106,5 +108,4 @@ int	add_infos(char *line, t_map *map)
 	else
 		return (double_err(line, ": unrecognized info", false),
 			free(info), EXIT_FAILURE);
-	return (free(info), EXIT_FAILURE);
 }

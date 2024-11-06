@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/06 13:04:19 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/06 13:58:27 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ int	check_map_char(char **map, int j, int i, t_map *data)
 		return (ft_putendl_fd("Error\nempty line", STDERR_FILENO), EXIT_FAILURE);
 	else if (map[j][i] == ' ')
 		return (map[j][i] = '0', EXIT_SUCCESS);
+	if ((map[j][i] == 'S' || map[j][i] == 'E' || map[j][i] == 'N'
+		|| map[j][i] == 'W') && check_if_closed(map, j, i) == EXIT_FAILURE)
+		return (ft_putendl_fd("Error\nplayer in a bad place", 2), EXIT_FAILURE);
 	if (map[j][i] == 'N')
 		return (add_initial_direction('N', data));
 	else if (map[j][i] == 'S')

@@ -6,11 +6,12 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/06 11:07:52 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/06 13:43:28 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include <unistd.h>
 
 int		parse_atou(char *str);
 int		color_to_struct(t_map *map, char *info, char type);
@@ -32,7 +33,8 @@ int	info_to_map(char *info, t_map *map, char *type)
 	else if (ft_strcmp(type, "C") == 0)
 		return (color_to_struct(map, info, 'C'));
 	else
-		return (free(info), EXIT_FAILURE);
+		return (ft_putstr_fd("unrecognized info", STDERR_FILENO),
+			free(info), EXIT_FAILURE);
 	if (*target != NULL)
 		return (print_err("duplicate element", false), free(info),
 			EXIT_FAILURE);
@@ -96,21 +98,21 @@ int	color_to_struct(t_map *map, char *info, char type)
 	int		tab[3];
 
 	if (count_char(info, ',') != 2)
-		return (free(info), EXIT_FAILURE);
+		return (ft_putendl_fd("Error", 2), free(info), EXIT_FAILURE);
 	if ((type == 'C' && map->cei_texture != -1)
 		|| (type == 'F' && map->flo_texture != -1))
-		return (free(info), EXIT_FAILURE);
+		return (ft_putendl_fd("Error", 2), free(info), EXIT_FAILURE);
 	split = ft_split(info, ',');
 	free(info);
-	if (split == NULL)
-		return (EXIT_FAILURE);
-	if (ft_strlen_2d(split) != 3)
-		return (free_2d_str(split), EXIT_FAILURE);
+	if (split == NULL || ft_strlen_2d(split) != 3)
+		return (ft_putendl_fd("Error", 2),
+			free_2d_str(split), EXIT_FAILURE);
 	tab[0] = parse_atou(split[0]);
 	tab[1] = parse_atou(split[1]);
 	tab[2] = parse_atou(split[2]);
 	if (tab[0] == -1 || tab[2] == -1 || tab[2] == -1)
-		return (free_2d_str(split), EXIT_FAILURE);
+		return (ft_putendl_fd("Error", 2),
+			free_2d_str(split), EXIT_FAILURE);
 	if (type == 'C')
 		map->cei_texture = tab[0] * pow(256, 2) + tab[1] * 256 + tab[2];
 	else if (type == 'F')
