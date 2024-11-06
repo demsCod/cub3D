@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/06 13:36:28 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/06 14:01:33 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ int	start_game(t_map *map)
 
 	ft_bzero(&all, sizeof(t_all));
 	ft_bzero(&player, sizeof(t_player));
-	init_player_data(&player, map->map);
+	player.all = &all;
 	map->all = &all;
 	all.map = map;
 	all.player = &player;
+	init_player_data(&player, map->map);
 	window.mlx_ptr = mlx_init();
 	all.player->mlx_ptr = window.mlx_ptr;
 	init_texture_buffer(map, &player, &window);
@@ -109,6 +110,7 @@ int	main(int ac, char **av)
 	if (get_map(&map, av[1]) == EXIT_FAILURE)
 		free_and_exit(EXIT_FAILURE, &map);
 	printf("Parsing passed !\n");
+	print_2d_array_nl(map.map);
 	start_game(&map);
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_data.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 16:34:33 by mdembele          #+#    #+#             */
-/*   Updated: 2024/11/06 12:23:18 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/06 13:56:08 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	player_pos(char **map, t_player *player)
 		}
 		y++;
 	}
+	ft_putendl_fd("Error\nPlayer not found", 2);
+	free_all_exit(EXIT_FAILURE, player->all);
 }
 
 void	init_player_data(t_player *player, char **map)
