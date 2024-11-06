@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:55:38 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/06 13:22:10 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/06 13:59:55 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,12 @@ typedef struct t_pixel
 	double					step;
 }	t_pixel;
 
+typedef struct s_all
+{
+	t_map		*map;
+	struct s_player	*player;
+}				t_all;
+
 typedef struct s_player
 {
 	char		initial_direction;
@@ -135,7 +141,7 @@ typedef struct s_player
 	int			draw_start;
 	int			draw_end;
 	double		wall_x;
-
+	t_all		*all;
 	t_data		data;
 	int			*pixel_map[WIN_HEIGHT + 1];
 	void		*mlx_ptr;
@@ -154,12 +160,6 @@ typedef struct s_gun
 	int			height;
 }				t_gun;
 
-typedef struct s_all
-{
-	t_map		*map;
-	t_player	*player;
-	t_gun		*gun;
-}				t_all;
 
 typedef struct s_img_data
 {
