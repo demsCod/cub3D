@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:58:09 by ibaby             #+#    #+#             */
-/*   Updated: 2024/09/18 21:43:39 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/06 12:05:36 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ void	print_err(char *err, bool erno)
 
 void	double_err(char *err1, char *err2, bool erno)
 {
+	char	*_1;
+	char	*_2;
+
 	ft_putstr_fd("Error\n", STDERR_FILENO);
-	err1 = replace_newline(err1);
-	err2 = replace_newline(err2);
+	_1 = replace_newline(err1);
+	_2 = replace_newline(err2);
 	if (err1 != NULL)
 		ft_putstr_fd(err1, STDERR_FILENO);
 	if (erno == true)
@@ -41,4 +44,8 @@ void	double_err(char *err1, char *err2, bool erno)
 	{
 		ft_putendl_fd(err2, STDERR_FILENO);
 	}
+	if (_1 != err1)
+		free(_1);
+	if (_2 != err2)
+		free(_2);
 }

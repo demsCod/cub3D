@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:38:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/02 17:12:53 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:44:37 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	parse_map(char **map, t_map *map_data)
 	while (map[++j] != NULL)
 	{
 		i = -1;
-		if (map[j + 1] != NULL)
-			map[j][ft_strlen(map[j]) - 1] = '\0';
 		while (map[j][++i] != '\0')
 		{
 			if (map[j][i] == '0')
@@ -33,10 +31,12 @@ int	parse_map(char **map, t_map *map_data)
 					return (EXIT_FAILURE);
 				}
 			}
-			if (map[j][i] != '0')
-				if (check_map_char(map[j][i], map_data) == EXIT_FAILURE)
+			else
+				if (check_map_char(map, j, i, map_data) == EXIT_FAILURE)
 					return (EXIT_FAILURE);
 		}
+		if (map[j + 1] != NULL)
+			map[j][ft_strlen(map[j]) - 1] = '\0';
 	}
 	return (EXIT_SUCCESS);
 }
@@ -58,9 +58,11 @@ int	get_file_infos(char **file, t_map *map)
 		while (file[i] != NULL && ft_strcmp(file[i], "\n") == 0)
 			++i;
 	}
+	if (file[i] == NULL)
+		return (EXIT_FAILURE);
 	map->map = strdup2d(&file[i]);
 	if (map->map == NULL || parse_map(map->map, map) == EXIT_FAILURE)
-		return (ft_free(map->map), EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -86,6 +88,7 @@ int	add_infos(char *line, t_map *map)
 	info = get_info(line);
 	if (info == NULL)
 		return (EXIT_FAILURE);
+	printf("line: %s\n", line);
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		return (info_to_map(info, map, "NO"));
 	else if (ft_strncmp(line, "SO ", 3) == 0)
@@ -99,8 +102,9 @@ int	add_infos(char *line, t_map *map)
 	else if (ft_strncmp(line, "C ", 2) == 0)
 		return (info_to_map(info, map, "C"));
 	else if (ft_strcmp(line, "\n") == 0)
-		return (EXIT_SUCCESS);
+		return (free(info), EXIT_SUCCESS);
 	else
-		return (double_err(line, ": unrecognized info", false), EXIT_FAILURE);
-	return (EXIT_FAILURE);
+		return (double_err(line, ": unrecognized info", false),
+			free(info), EXIT_FAILURE);
+	return (free(info), EXIT_FAILURE);
 }

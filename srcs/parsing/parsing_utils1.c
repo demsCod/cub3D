@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/02 17:10:26 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:04:19 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include <unistd.h>
 
 int	open_map(char *map_path)
 {
@@ -42,28 +43,30 @@ int	check_if_closed(char **map, int j, int i)
 	return (EXIT_SUCCESS);
 }
 
-int	check_map_char(char c, t_map *map)
+int	check_map_char(char **map, int j, int i, t_map *data)
 {
-	if (c == 'N')
-		return (add_initial_direction('N', map));
-	else if (c == 'S')
-		return (add_initial_direction('S', map));
-	else if (c == 'E')
-		return (add_initial_direction('E', map));
-	else if (c == 'W')
-		return (add_initial_direction('W', map));
-	else if (c == '1' || c == ' ')
+	if (i == 0 && map[j][i] == '\n')
+		return (ft_putendl_fd("Error\nempty line", STDERR_FILENO), EXIT_FAILURE);
+	else if (map[j][i] == ' ')
+		return (map[j][i] = '0', EXIT_SUCCESS);
+	if (map[j][i] == 'N')
+		return (add_initial_direction('N', data));
+	else if (map[j][i] == 'S')
+		return (add_initial_direction('S', data));
+	else if (map[j][i] == 'E')
+		return (add_initial_direction('E', data));
+	else if (map[j][i] == 'W')
+		return (add_initial_direction('W', data));
+	else if (map[j][i] == '1' || map[j][i] == ' ')
 		return (EXIT_SUCCESS);
-	else
+	else if (map[j][i] != '\n')
 	{
 		ft_putstr_fd("Error\n'", STDERR_FILENO);
-		if (c == '\n')
-			ft_putstr_fd("\\n", STDERR_FILENO);
-		else
-			ft_putchar_fd(c, STDERR_FILENO);
+		ft_putchar_fd(map[j][i], STDERR_FILENO);
 		ft_putendl_fd("': unexpected char detected", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
+	return (EXIT_SUCCESS);
 }
 
 int	add_initial_direction(char direction, t_map *map)

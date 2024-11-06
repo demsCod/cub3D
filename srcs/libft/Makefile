@@ -91,7 +91,7 @@ SRCS =	count_char.c			\
 
 G                = \e[92m
 X                 = \e[0m
-BAR_SIZE        = 75
+BAR_SIZE        = 50
 
 TOTAL_FILES        := $(words $(SRCS))
 COMPILED_FILES    := 0

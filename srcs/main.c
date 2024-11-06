@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/02 18:26:25 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:36:28 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+#include "errors/error.h"
+#include "libft/libft.h"
+
 
 int	quit(t_all *all)
 {
-	free_all_exit(all);
+	free_all_exit(EXIT_SUCCESS, all);
 	return (0);
 }
 
@@ -44,6 +47,8 @@ void	init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 	int			i;
 
 	(void)player;
+	if (win->mlx_ptr == NULL)
+		free_all_exit(EXIT_FAILURE, map->all);
 	map->path_texture[0] = ft_strdup(map->no_texture);
 	map->path_texture[1] = ft_strdup(map->so_texture);
 	map->path_texture[2] = ft_strdup(map->ea_texture);
@@ -54,7 +59,8 @@ void	init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 		tmp.img = mlx_xpm_file_to_image(win->mlx_ptr,
 				map->path_texture[i], &tmp.width, &tmp.height);
 		if (!tmp.img)
-			exit(i);
+			free_all_exit(EXIT_FAILURE, map->all);
+		printf("C comment\n");
 		tmp.addr = (int *)mlx_get_data_addr(tmp.img,
 				&tmp.bpp, &tmp.line_len, &tmp.endian);
 		create_text(&tmp, map, i);
@@ -65,28 +71,27 @@ void	init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 int	start_game(t_map *map)
 {
 	t_windows	window;
-	t_player	*player;
-	t_all		*all;
+	t_player	player;
+	t_all		all;
 
-	player = malloc(sizeof(t_player));
-	all = malloc(sizeof(t_all));
-	if (!player || !all)
-		return (EXIT_FAILURE);
-	init_player_data(player, map->map);
-	all->map = map;
-	all->player = player;
+	ft_bzero(&all, sizeof(t_all));
+	ft_bzero(&player, sizeof(t_player));
+	init_player_data(&player, map->map);
+	map->all = &all;
+	all.map = map;
+	all.player = &player;
 	window.mlx_ptr = mlx_init();
+	all.player->mlx_ptr = window.mlx_ptr;
+	init_texture_buffer(map, &player, &window);
 	window.win_ptr = mlx_new_window(window.mlx_ptr, WIN_WIDHT, WIN_HEIGHT,
 			"CUB 3D");
+	all.player->win_ptr = window.win_ptr;
 	if (!window.win_ptr)
-		return (EXIT_FAILURE);
-	init_texture_buffer(map, player, &window);
-	all->player->mlx_ptr = window.mlx_ptr;
-	all->player->win_ptr = window.win_ptr;
-	game_loop(all);
-	mlx_hook(window.win_ptr, 02, (1L << 0), ft_key_function, all);
-	mlx_hook(window.win_ptr, 17, (0L), *quit, all);
-	mlx_loop_hook(window.mlx_ptr, game_loop, all);
+		free_all_exit(EXIT_FAILURE, &all);
+	game_loop(&all);
+	mlx_hook(window.win_ptr, 02, (1L << 0), ft_key_function, &all);
+	mlx_hook(window.win_ptr, 17, (0L), *quit, &all);
+	mlx_loop_hook(window.mlx_ptr, game_loop, &all);
 	mlx_loop(window.mlx_ptr);
 	return (EXIT_SUCCESS);
 }
@@ -102,7 +107,8 @@ int	main(int ac, char **av)
 	map.cei_texture = -1;
 	map.flo_texture = -1;
 	if (get_map(&map, av[1]) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		free_and_exit(EXIT_FAILURE, &map);
+	printf("Parsing passed !\n");
 	start_game(&map);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 16:18:49 by mdembele          #+#    #+#             */
-/*   Updated: 2024/11/02 17:22:20 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/06 13:23:52 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_strafe_right(t_player *r, t_map *map)
 int	ft_key_function(int keycode, t_all *data)
 {
 	if (keycode == XK_Escape)
-		free_all_exit(data);
+		free_all_exit(EXIT_SUCCESS, data);
 	if (keycode == XK_Left)
 		ft_move_left(data->player);
 	if (keycode == XK_Right)

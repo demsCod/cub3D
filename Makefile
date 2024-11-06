@@ -22,7 +22,7 @@ SRC_PATH = ./srcs
 
 LIBFTPATH = $(SRC_PATH)/libft
 
-FILES = srcs/main.c	\
+SRCS = srcs/main.c	\
 		srcs/parsing/parsing.c	\
 		srcs/parsing/parsing_utils1.c	\
 		srcs/parsing/infos_utils.c	\
@@ -41,17 +41,28 @@ FILES = srcs/main.c	\
 
 INCLUDES = -I/usr/include -lmlx -lft -I./includes
 
-OBJ = $(FILES:.c=.o)
+OBJ = $(SRCS:.c=.o)
 
 LIBFT = $(LIBFTPATH)/libft.a
 
 LIBMLX = libmx_linux.a
 
+#	Loading bar	#
+
+G                = \e[92m
+X                 = \e[0m
+BAR_SIZE        = 50
+
+TAL_ddSRCS        := $(words $(SRCS))
+MPILED_ddSRCS    := 0
+
+#				#
 
 all : $(LIBMLX)  $(LIBFT) $(NAME)
 
 $(NAME) : $(OBJ)
 		@$(CC) $(FLAGS)  $(OBJ) $(INCLUDES) -L $(LIBFTPATH) -lft -L ./mlx -lmlx -lXext -lX11 -lm -no-pie -o $(NAME)
+		@echo
 		@echo "$(GREEN)$(NAME) done ✅$(END)"
 
 $(LIBMLX) :
@@ -61,8 +72,18 @@ $(LIBFT) :
 		@make -sC $(LIBFTPATH)
 
 %.o: %.c
-		@$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
-		@echo "$(BLUE)Compiling: $^$(END)"
+	@$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+# @echo "$(BLUE)Compiling: $^$(END)"
+	@$(eval MPILED_ddSRCS := $(shell echo $$(($(MPILED_ddSRCS)+1))))
+	@echo -n " "
+	@for i in `seq 1 $(shell echo "$$(($(MPILED_ddSRCS)*$(BAR_SIZE)/$(TAL_ddSRCS)))")`; do \
+		echo -n "$(G)▰$(X)" ; \
+	done
+	@for i in `seq 1 $(shell echo "$$(($(BAR_SIZE)-$(MPILED_ddSRCS)*$(BAR_SIZE)/$(TAL_ddSRCS)))")`; do \
+		echo -n "▱" ; \
+	done
+	@echo -n " [$(shell echo "scale=2; $(MPILED_ddSRCS)/$(TAL_ddSRCS) * 100" | bc)%] "
+	@printf "\e[0K\r"
 
 
 clean :
