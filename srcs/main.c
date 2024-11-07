@@ -6,14 +6,13 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/07 12:41:31 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:13:41 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 #include "errors/error.h"
 #include "libft/libft.h"
-
 
 int	quit(t_all *all)
 {
