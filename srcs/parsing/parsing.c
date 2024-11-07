@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:38:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/06 13:44:52 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/11/07 12:42:03 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	add_infos(char *line, t_map *map)
 	info = get_info(line);
 	if (info == NULL)
 		return (EXIT_FAILURE);
-	printf("line: %s\n", line);
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		return (info_to_map(info, map, "NO"));
 	else if (ft_strncmp(line, "SO ", 3) == 0)

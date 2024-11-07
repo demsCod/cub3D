@@ -6,7 +6,7 @@
 /*   By: mdembele <mdembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:37:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/11/06 14:01:33 by mdembele         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:41:31 by mdembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	init_texture_buffer(t_map *map, t_player *player, t_windows *win)
 				map->path_texture[i], &tmp.width, &tmp.height);
 		if (!tmp.img)
 			free_all_exit(EXIT_FAILURE, map->all);
-		printf("C comment\n");
 		tmp.addr = (int *)mlx_get_data_addr(tmp.img,
 				&tmp.bpp, &tmp.line_len, &tmp.endian);
 		create_text(&tmp, map, i);
@@ -109,8 +108,6 @@ int	main(int ac, char **av)
 	map.flo_texture = -1;
 	if (get_map(&map, av[1]) == EXIT_FAILURE)
 		free_and_exit(EXIT_FAILURE, &map);
-	printf("Parsing passed !\n");
-	print_2d_array_nl(map.map);
 	start_game(&map);
 	return (EXIT_SUCCESS);
 }
